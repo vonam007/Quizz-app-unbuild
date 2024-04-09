@@ -4,12 +4,24 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Admin from './Components/Admin/Admin';
+import User from './Components/User/User';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     {/* <React.StrictMode> */}
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route></Route>
+        <Route path="/" element={<App />}>
+          <Route path="admins" element={<Admin />} />
+          <Route path='users' element={<User />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
     {/* </React.StrictMode> */}
   </Provider>
 );

@@ -1,0 +1,94 @@
+.Nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    background-color: #333;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    .leftNav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        p {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 0.8rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 50px;
+            padding: 0 1rem;
+
+            &:hover {
+                background-color: aquamarine;
+                color: #333;
+            }
+        }
+    }
+
+    .rightNav {
+        display: flex;
+        align-items: center;
+
+        .dropdown {
+
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+
+            span {
+                line-height: 50px;
+                padding: 1rem;
+                user-select: none;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+                transform: translate(-35%, 0);
+
+                a {
+                    color: #333;
+                    text-decoration: none;
+                    display: block;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    padding: 12px 16px;
+                    min-width: 160px;
+
+                    &:hover {
+                        background-color: #ccc;
+                    }
+                }
+            }
+
+            &:hover {
+                background-color: aquamarine;
+                color: #333;
+
+                .dropdown-content {
+                    display: block;
+                }
+            }
+        }
+
+
+
+
+
+
+    }
+}

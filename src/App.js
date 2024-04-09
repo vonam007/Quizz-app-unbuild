@@ -1,9 +1,10 @@
 // import logo from './logo.svg';
 import './App.scss';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { increaseCounter, decreaseCounter } from './redux/action/counterAction';
 
 import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Header from './Components/Header/Header';
+import Footer from './Components/Footer/Footer';
 
 
 class App extends React.Component {
@@ -12,7 +13,17 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        Hello world from App.js
+        <div className='header-container'>
+          <Header />
+        </div>
+        <div className='main-container'>
+          <div className='sideNav-container'></div>
+          <div className='app-content'>
+            <Outlet /></div>
+        </div>
+        <div className='footer-container'>
+          <Footer />
+        </div>
       </div>
     )
   };
