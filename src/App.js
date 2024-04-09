@@ -3,7 +3,6 @@ import './App.scss';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { increaseCounter, decreaseCounter } from './redux/action/counterAction';
 
-import MyComponent from './Components/MyComponent';
 import React from 'react';
 
 
@@ -14,7 +13,6 @@ class App extends React.Component {
     return (
       <div className="App">
         Hello world from App.js
-        <MyComponent />
       </div>
     )
   };
