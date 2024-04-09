@@ -11,7 +11,7 @@ const Home = () => {
                 <button className='getStart-Btn'>Get Start</button>
             </div>
             <div className='video-container'>
-                <video loop playsInline muted className='video'>
+                <video autoPlay loop playsInline muted className='video'>
                     <source
                         src={videoHomePage}
                         type='video/mp4'

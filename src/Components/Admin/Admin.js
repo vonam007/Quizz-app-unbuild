@@ -1,15 +1,15 @@
+import Sidebars from "../Sidebar/Sidebar";
+import './Admin.scss';
+
 const Admin = (props) => {
 
     return (
-        <div className='Admin'>
-            <h1>Admin</h1>
+        <div className='Admin-container'>
+            <div className='Admin-sidebar'>
+                <Sidebars />
+            </div>
             <div className='Admin-Content'>
-                <div className='Admin-Content-Left'>
-                    <h2>Admin Left</h2>
-                </div>
-                <div className='Admin-Content-Right'>
-                    <h2>Admin Right</h2>
-                </div>
+                <h2>Admin Content</h2>
             </div>
         </div>
     );

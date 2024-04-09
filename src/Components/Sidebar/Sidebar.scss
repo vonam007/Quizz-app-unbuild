@@ -1,0 +1,40 @@
+.sidebar-container {
+    height: 100vh;
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    color: #fff;
+
+    .Sidebar-header {
+        text-align: center;
+        margin: 2rem 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        h1 {
+            line-height: 60px;
+            margin-left: 1rem;
+        }
+    }
+
+    li:not(:last-child) {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .sub {
+        background-color: rgba(0, 16, 63, 0.8) !important;
+    }
+
+}
+
+.css-dip3t8 {
+    background-color: rgb(249, 249, 249, 0.2) !important;
+}
+
+.ps-menu-button {
+    font-weight: 600;
+
+    &:hover {
+        color: #010101 !important;
+    }
+}

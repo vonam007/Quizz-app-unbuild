@@ -1,11 +1,9 @@
-// import logo from './logo.svg';
-import './App.scss';
 
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
-
+import Sidebars from './Components/Sidebar/Sidebar';
 
 class App extends React.Component {
 
@@ -17,7 +15,8 @@ class App extends React.Component {
           <Header />
         </div>
         <div className='main-container'>
-          <div className='sideNav-container'></div>
+          <div className='sideNav-container'>
+          </div>
           <div className='app-content'>
             <Outlet /></div>
         </div>
