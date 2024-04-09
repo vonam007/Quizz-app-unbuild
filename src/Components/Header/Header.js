@@ -1,17 +1,19 @@
 import './Header.scss'
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const Header = () => {
     return (
         <div className='Nav'>
             <div className='leftNav'>
-                <p>NamVo</p>
-                <Link to='/'>Home</Link>
-                <Link to='/users'>Users</Link>
-                <Link to='/admins'>Admin</Link>
+                <NavLink to='/' className="logo" >NamVo</NavLink>
+                <NavLink to='/'>Home</NavLink>
+                <NavLink to='/users'>Users</NavLink>
+                <NavLink to='/admins'>Admin</NavLink>
             </div>
             <div className='rightNav'>
-                <div className='dropdown'>
+                <button className='loginBtn Btn'>Log in</button>
+                <button className='signupBtn Btn'>Sign up</button>
+                {/* <div className='dropdown'>
                     <span>Settings</span>
                     <div className='dropdown-content'>
                         <div>
@@ -27,7 +29,7 @@ const Header = () => {
                             <Link to='/'>Register</Link>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div >
     );

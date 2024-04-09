@@ -1,33 +1,42 @@
 .Nav {
     display: flex;
+    position: fixed;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
-    background-color: #333;
-    color: #fff;
+    background-color: rgba(0, 0, 0, 0);
+    color: #333;
     font-size: 1.2rem;
     font-weight: 600;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 
     .leftNav {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        p {
+        .logo {
             margin-right: 1rem;
             font-size: 1.5rem;
+            line-height: 50px;
             cursor: pointer;
+            color: #333;
+            text-decoration: none;
         }
 
-        a {
-            color: #fff;
+        a:not(.logo) {
+            color: #333;
             text-decoration: none;
-            margin-right: 0.8rem;
             font-size: 1rem;
             font-weight: 400;
             line-height: 50px;
             padding: 0 1rem;
+
+            &.active {
+                background-color: aquamarine;
+                color: #333;
+            }
 
             &:hover {
                 background-color: aquamarine;
@@ -39,6 +48,39 @@
     .rightNav {
         display: flex;
         align-items: center;
+
+        .Btn {
+
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 400;
+            border-radius: 5px;
+
+            &.loginBtn {
+                border: none;
+                background-color: aquamarine;
+                color: #333;
+
+
+            }
+
+            &.signupBtn {
+                border: 1px solid aquamarine;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: aquamarine;
+
+
+            }
+
+            &:hover {
+                background-color: #333;
+                color: aquamarine;
+            }
+
+
+        }
 
         .dropdown {
 
