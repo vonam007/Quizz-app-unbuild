@@ -6,9 +6,17 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.scss';
+
+
 import Admin from './Components/Admin/Admin';
+import DashBoard from './Components/Admin/Content/DashBoard';
+import ManageUsers from './Components/Admin/Content/ManageUsers';
+
 import User from './Components/User/User';
 import Home from './Components/Home/Home';
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,12 +24,14 @@ root.render(
     {/* <React.StrictMode> */}
     <BrowserRouter>
       <Routes>
-        <Route></Route>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path='users' element={<User />} />
         </Route>
-        <Route path="admins" element={<Admin />} />
+        <Route path="admins" element={<Admin />}>
+          <Route index element={<DashBoard />} />
+          <Route path='manageUsers' element={<ManageUsers />} />
+        </Route>
       </Routes>
     </BrowserRouter>
     {/* </React.StrictMode> */}

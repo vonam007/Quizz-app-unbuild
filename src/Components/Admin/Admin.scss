@@ -1,4 +1,19 @@
 .Admin-container {
     display: flex;
     flex-direction: row;
+
+    .Admin-Content {
+        width: 100%;
+
+        .Admin-header {
+            height: 50px;
+            width: 100%;
+            background-color: rgba(0, 16, 63, 0.8);
+            color: white;
+
+            h1 {
+                line-height: 50px;
+            }
+        }
+    }
 }
