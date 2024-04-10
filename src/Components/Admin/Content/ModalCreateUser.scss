@@ -1,7 +1,7 @@
 .modal {
     position: fixed;
     width: 70%;
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -16,6 +16,8 @@
 
     .modal-header {
         margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
     }
 
     .modal-content {
@@ -55,6 +57,50 @@
                     padding: 9px;
                 }
 
+                .img-upload-label {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    line-height: 1rem;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    background-color: #ccc;
+                    padding: 10px;
+                    border-radius: 6px;
+
+                    .plus-sign {
+                        color: darkgreen;
+                        margin-right: 2px;
+                    }
+
+                    &:hover {
+                        background-color: #bbb;
+                    }
+                }
+
+            }
+
+            .img-preview {
+                height: 12rem;
+                width: 100%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+
+                span {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    width: 100%;
+                    font-size: 1.5rem;
+                    color: #ccc;
+                    border: 1px dashed #ccc;
+
+                }
             }
         }
     }
@@ -62,6 +108,9 @@
     .modal-footer {
         display: flex;
         justify-content: flex-end;
+        transform: translateY(50%);
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
 
         button {
             padding: 10px 20px;
@@ -94,6 +143,20 @@
         }
 
     }
+
+    .announce {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(250%);
+        height: 1.5rem;
+
+        .info {
+            display: none;
+            line-height: 1.5rem;
+        }
+    }
 }
 
 .overlay {
@@ -104,6 +167,7 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 990;
+
 }
 
 @keyframes moveIn {

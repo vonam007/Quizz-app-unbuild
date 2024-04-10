@@ -1,6 +1,8 @@
 
 import { useState } from 'react';
 import ModalCreateUser from './ModalCreateUser';
+import './ManageUsers.scss';
+
 
 const ManageUsers = (props) => {
 
