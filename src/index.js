@@ -7,7 +7,6 @@ import store from './redux/store';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.scss';
 
-
 import Admin from './Components/Admin/Admin';
 import DashBoard from './Components/Admin/Content/DashBoard';
 import ManageUsers from './Components/Admin/Content/ManageUsers';

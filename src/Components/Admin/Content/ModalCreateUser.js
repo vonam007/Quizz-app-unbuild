@@ -3,6 +3,8 @@ import './ModalCreateUser.scss';
 import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { toast } from 'react-toastify';
+import { postCreateNewUser } from '../../../services/apiService';
 
 const Modal = (props) => {
 
@@ -30,15 +32,51 @@ const Modal = (props) => {
     const [username, setUsername] = useState('');
     const [role, setRole] = useState('USER');
     const [image, setImage] = useState('');
-
     const [previewImage, setPreviewImage] = useState("");
-
-
 
     const handleUpload = (e) => {
         if (e.target && e.target.files && e.target.files[0]) {
             setPreviewImage(URL.createObjectURL(e.target.files[0]));
             setImage(e.target.files[0]);
+        }
+
+    }
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
+
+
+    const handleSaveCreateUser = async () => {
+        //check data
+        //email not valid
+
+        if (!validateEmail(email)) {
+            toast.error('Email is not valid');
+        }
+
+        //password < 8
+        if (password.length < 8) {
+            toast.warn('Password must be at least 8 characters');
+        }
+
+        if (!validateEmail(email) || password.length < 8) {
+            return;
+        }
+
+        const data = await postCreateNewUser(email, password, username, role, image);
+
+        if (data && data.EC === 0) {
+            toast.success(data.EM);
+            setTimeout(() => {
+                props.setShowModal(false);
+            }, 3000);
+        }
+        else if (data && data.EC !== 0) {
+            toast.error(data.EM);
         }
 
     }
@@ -124,7 +162,7 @@ const Modal = (props) => {
                 </div>
                 <div className="modal-footer">
                     <button className="btn-cancel" onClick={() => props.setShowModal(false)}>Close</button>
-                    <button className="btn-save" onClick={() => props.setShowModal(false)}>Save</button>
+                    <button className="btn-save" onClick={() => handleSaveCreateUser()}>Save</button>
                 </div>
                 <div className='announce'>
                     <div className='info' id='infoA'>

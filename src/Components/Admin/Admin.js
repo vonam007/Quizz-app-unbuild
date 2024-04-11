@@ -2,6 +2,10 @@ import Sidebars from "./Sidebar/Sidebar";
 import './Admin.scss';
 import { Outlet } from 'react-router-dom';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const Admin = (props) => {
 
     return (
@@ -17,6 +21,10 @@ const Admin = (props) => {
                     <Outlet />
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+            />
         </div>
     );
 }
