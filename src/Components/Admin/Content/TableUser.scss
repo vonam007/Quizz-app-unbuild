@@ -1,0 +1,67 @@
+#customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+
+    td,
+    th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: rgba(0, 16, 63, 0.8);
+        color: white;
+    }
+
+    td {
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+        }
+
+        .view-btn {
+            background-color: #4CAF50;
+
+            &:hover {
+                background-color: #377f3a;
+            }
+        }
+
+        .edit-btn {
+            background-color: #008CBA;
+
+            &:hover {
+                background-color: #007a8c;
+            }
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+
+            &:hover {
+                background-color: #d32f2f;
+            }
+        }
+    }
+}

@@ -159,6 +159,117 @@
     }
 }
 
+
+.modal-view {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .modal-footer,
+    .modal-header {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .modal-header {
+        .title {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            span {
+                transform: translateX(15px);
+                font-size: 1.5rem;
+                font-weight: 600;
+                width: fit-content;
+                display: block;
+            }
+        }
+    }
+
+    .modal-content {
+        width: 80%;
+        margin-top: 20px;
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+
+            &:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            .img-preview {
+                height: 12rem;
+                width: 80%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+
+                span {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    width: 100%;
+                    font-size: 1.5rem;
+                    color: #ccc;
+                    border: 1px dashed #ccc;
+
+                }
+            }
+
+
+        }
+    }
+}
+
+.modal-delete {
+    .modal-content {
+        .user-name {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 20px 0 5px;
+        }
+    }
+
+    .modal-footer {
+        .btn-cancel {
+            background-color: rgb(110, 110, 110);
+            color: #fff;
+
+            &:hover {
+                background-color: rgb(68, 68, 68);
+                color: #fff;
+            }
+        }
+
+        .btn-save {
+            background-color: rgb(214, 0, 0);
+            color: #fff;
+
+            &:hover {
+                background-color: rgb(133, 0, 0);
+                color: #fff;
+            }
+        }
+    }
+}
+
 .overlay {
     position: fixed;
     top: 0;
