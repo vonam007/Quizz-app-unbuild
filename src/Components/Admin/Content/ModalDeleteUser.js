@@ -9,8 +9,7 @@ const ModalDeleteUser = (props) => {
 
     const [announce, setAnnounce] = useState(false);
 
-    const { setShowModal, user, fetchListUsers } = props;
-    console.log(user);
+    const { setShowModal, user } = props;
 
     const backdropClick = () => {
         console.log('backdrop clicked');
@@ -41,15 +40,15 @@ const ModalDeleteUser = (props) => {
 
     const handleDeleteUser = async () => {
 
-        console.log(user.id);
         const data = await delDeleteUser(user.id);
 
         if (data && data.EC === 0) {
             toast.success(data.EM);
             setTimeout(() => {
-                setShowModal(false);
-            }, 1000);
-            await fetchListUsers();
+                props.setShowModal(false);
+            }, 2000);
+            // await props.fetchListUsers();
+            props.setCurrentPage(1); //reset page to 1, then the table auto fetch data
         }
         else if (data && data.EC !== 0) {
             toast.error(data.EM);

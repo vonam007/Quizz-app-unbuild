@@ -1,13 +1,28 @@
 // import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./TableUser.scss";
+import ReactPaginate from "react-paginate";
 
-const TableUser = (props) => {
+const TableUserPaginate = (props) => {
+    const { listUser, pageCount, currentPage, fetchListUsersWithPaginate } = props;
+
+    const handlePageClick = (event) => {
+        props.setCurrentPage(+event.selected + 1);
+    };
 
 
-    const { listUser } = props;
+
+    useEffect(() => {
+        const refreshTable = async (currentPage) => {
+            await fetchListUsersWithPaginate(currentPage);
+        }
+        refreshTable(currentPage);
+    }, [currentPage, fetchListUsersWithPaginate])
+
+
     return (
         <>
-            <table className="table table-user ">
+            <table className="table-user-paginate table" >
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -40,8 +55,32 @@ const TableUser = (props) => {
                     {listUser && listUser.length === 0 && <tr><td colSpan="5" style={{ textAlign: "center" }}>Not Found Data</td></tr>}
                 </tbody>
             </table>
+            <div className="tablePagination">
+                <ReactPaginate
+                    nextLabel="Next >"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    pageCount={pageCount}
+                    previousLabel="< Prev"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    previousClassName="page-item"
+                    previousLinkClassName="page-link"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    breakLabel="..."
+                    breakClassName="page-item"
+                    breakLinkClassName="page-link"
+                    containerClassName="pagination"
+                    activeClassName="active"
+                    renderOnZeroPageCount={null}
+                    forcePage={currentPage - 1}
+                />
+            </div>
+
         </>
     );
 
 }
-export default TableUser;
+export default TableUserPaginate;

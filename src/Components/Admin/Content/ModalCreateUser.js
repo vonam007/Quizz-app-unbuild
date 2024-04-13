@@ -73,8 +73,9 @@ const ModalCreateUser = (props) => {
             toast.success(data.EM);
             setTimeout(() => {
                 props.setShowModal(false);
-            }, 1000);
-            await props.fetchListUsers();
+            }, 2000);
+            //await props.fetchListUsers();
+            props.setCurrentPage(1); //reset page to 1, then the table auto fetch data
         }
         else if (data && data.EC !== 0) {
             toast.error(data.EM);
@@ -139,14 +140,14 @@ const ModalCreateUser = (props) => {
                             </div>
                         </div>
                         <div className="form-group">
-                            <label className='img-upload-label' htmlFor='inputImg'>
+                            <label className='img-upload-label' htmlFor='inputImg-create'>
                                 <AiFillPlusCircle className="plus-sign" />
                                 Upload File Image
                             </label>
                             <input
                                 type="file"
                                 hidden
-                                id='inputImg'
+                                id='inputImg-create'
                                 onChange={(e) => handleUpload(e)}
                             />
                         </div>

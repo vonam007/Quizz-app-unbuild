@@ -11,7 +11,7 @@ import _ from 'lodash';
 const ModalUpdateUser = (props) => {
 
     const [announce, setAnnounce] = useState(false);
-    const { setShowModal, fetchListUsers, UserEdit } = props;
+    const { setShowModal, UserEdit } = props;
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -64,8 +64,10 @@ const ModalUpdateUser = (props) => {
             toast.success(data.EM);
             setTimeout(() => {
                 setShowModal(false);
-            }, 1000);
-            await fetchListUsers();
+            }, 2000);
+            // await props.fetchListUsers();
+            props.setCurrentPage(1);//reset page to 1, then the table auto fetch data
+
         }
         else if (data && data.EC !== 0) {
             toast.error(data.EM);
