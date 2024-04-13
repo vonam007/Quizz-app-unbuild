@@ -66,8 +66,8 @@ const ModalUpdateUser = (props) => {
                 setShowModal(false);
             }, 2000);
             // await props.fetchListUsers();
-            props.setCurrentPage(1);//reset page to 1, then the table auto fetch data
-
+            // props.setCurrentPage(1);//reset page to 1, then the table auto fetch data
+            // update does not need to reset page
         }
         else if (data && data.EC !== 0) {
             toast.error(data.EM);
