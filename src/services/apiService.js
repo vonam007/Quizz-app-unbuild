@@ -30,7 +30,7 @@ const putEditUser = (id, username, role, image) => {
 
 const delDeleteUser = (userID) => {
     console.log(userID);
-    return axios.delete('api/v1/participant/', { data: { id: userID } });
+    return axios.delete('api/v1/participant', { data: { id: userID } });
 }
 
 const getAllUsers = () => {
