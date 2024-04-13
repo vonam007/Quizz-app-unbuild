@@ -1,7 +1,14 @@
 import './Header.scss'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+
+    const navigate = useNavigate();
+
+    const handleLogin = () => {
+        navigate('/login');
+    }
+
     return (
         <div className='Nav'>
             <div className='leftNav'>
@@ -11,7 +18,7 @@ const Header = () => {
                 <NavLink to='/admins'>Admin</NavLink>
             </div>
             <div className='rightNav'>
-                <button className='loginBtn Btn'>Log in</button>
+                <button className='loginBtn Btn' onClick={() => handleLogin()}>Log in</button>
                 <button className='signupBtn Btn'>Sign up</button>
                 {/* <div className='dropdown'>
                     <span>Settings</span>
