@@ -8,6 +8,9 @@ const Header = () => {
     const handleLogin = () => {
         navigate('/login');
     }
+    const handleSignUp = () => {
+        navigate('/register');
+    }
 
     return (
         <div className='Nav'>
@@ -19,7 +22,7 @@ const Header = () => {
             </div>
             <div className='rightNav'>
                 <button className='loginBtn Btn' onClick={() => handleLogin()}>Log in</button>
-                <button className='signupBtn Btn'>Sign up</button>
+                <button className='signupBtn Btn' onClick={() => handleSignUp()}>Sign up</button>
                 {/* <div className='dropdown'>
                     <span>Settings</span>
                     <div className='dropdown-content'>

@@ -1,4 +1,6 @@
 .login-container {
+    background-color: #F7F6F2;
+    height: 100vh;
 
     .Header {
         width: 100%;
@@ -47,7 +49,8 @@
             flex-direction: column;
             align-items: center;
             padding: 1rem;
-            width: 60%;
+            width: min(60%, 550px);
+
 
             .Login-input {
 
@@ -68,6 +71,30 @@
                         border-radius: 5px;
                         border: 1px solid #9b9b9b;
                         width: 100%;
+                    }
+
+
+
+                }
+
+                .password-group {
+                    position: relative;
+
+                    .show-password {
+                        position: absolute;
+                        right: 10px;
+                        bottom: 28px;
+
+                        svg {
+                            color: #000;
+                            cursor: pointer;
+
+                            &:hover {
+                                background-color: #ccc;
+                                border-radius: 3px;
+                            }
+                        }
+
                     }
                 }
             }
@@ -93,10 +120,25 @@
                 border: none;
                 background-color: aquamarine;
                 color: #333;
+                user-select: none;
 
                 &:hover {
                     background-color: #333;
                     color: aquamarine;
+                }
+            }
+
+            .back-home {
+                margin-top: 1rem;
+                font-size: 0.8rem;
+                width: 100%;
+                font-style: italic;
+                text-align: center;
+                color: #333;
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
                 }
             }
         }

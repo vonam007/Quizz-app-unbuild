@@ -1,41 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './index.scss';
 
-import Admin from './Components/Admin/Admin';
-import DashBoard from './Components/Admin/Content/DashBoard';
-import ManageUsers from './Components/Admin/Content/ManageUsers';
-
-import Login from './Components/Auth/Login';
-
-import User from './Components/User/User';
-import Home from './Components/Home/Home';
-
-
-
-
+import Layout from './Layout';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     {/* <React.StrictMode> */}
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path='users' element={<User />} />
-        </Route>
-        <Route path="admins" element={<Admin />}>
-          <Route index element={<DashBoard />} />
-          <Route path='manageUsers' element={<ManageUsers />} />
-        </Route>
-        <Route path='login' element={<Login />} />
-      </Routes>
+      <Layout />
     </BrowserRouter>
     {/* </React.StrictMode> */}
   </Provider>

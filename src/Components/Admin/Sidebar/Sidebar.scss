@@ -4,12 +4,32 @@
     background-repeat: no-repeat;
     color: #fff;
 
+    .collapseMenuBtn {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: flex-end;
+
+        .btn {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            margin-right: 8px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    }
+
+
     .Sidebar-header {
         text-align: center;
         margin: 2rem 0;
         display: flex;
         flex-direction: row;
         align-items: center;
+        text-decoration: none;
+        color: #fff;
+
 
         h1 {
             line-height: 60px;
