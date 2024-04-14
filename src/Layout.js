@@ -14,6 +14,7 @@ import Home from './Components/Home/Home';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ListQuiz from './Components/User/ListQuiz';
 
 const Layout = () => {
 
@@ -23,7 +24,7 @@ const Layout = () => {
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route index element={<Home />} />
-                    <Route path='users' element={<User />} />
+                    <Route path='users' element={<ListQuiz />} />
                 </Route>
                 <Route path="admins" element={<Admin />}>
                     <Route index element={<DashBoard />} />
@@ -34,7 +35,7 @@ const Layout = () => {
             </Routes>
             <ToastContainer
                 position="top-right"
-                autoClose={2000}
+                autoClose={3000}
             />
         </>
     )

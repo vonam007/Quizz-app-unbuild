@@ -121,10 +121,40 @@
                 background-color: aquamarine;
                 color: #333;
                 user-select: none;
+                position: relative;
 
                 &:hover {
                     background-color: #333;
                     color: aquamarine;
+                }
+
+                &:disabled {
+                    background-color: #ccc;
+                    color: #333;
+                    cursor: not-allowed;
+                }
+
+                .spinner-container {
+
+                    position: absolute;
+                    left: 30%;
+                    top: 25%;
+
+                    .spinner {
+                        color: rgb(0, 140, 255);
+                        animation: spining 0.5s linear infinite;
+                    }
+
+                    @keyframes spining {
+                        0% {
+                            transform: rotate(0deg);
+                        }
+
+                        100% {
+                            transform: rotate(360deg);
+                        }
+
+                    }
                 }
             }
 

@@ -1,14 +1,22 @@
 import './Home.scss';
 import videoHomePage from '../../assets/video-homepage.mp4'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+
+    const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+    const navigate = useNavigate();
     return (
         <div className='Home'>
             <div className='welcome'>
                 <h1>Welcome to my website</h1>
                 <h3>Feel free to explore</h3>
                 <p>This is a demo application for testing project</p>
-                <button className='getStart-Btn'>Get Start</button>
+                {isAuthenticated === false
+                    ? <button className='getStart-Btn' onClick={() => navigate('/login')}>Get Start</button>
+                    : <button className='getStart-Btn' onClick={() => navigate('/users')}>Doing Quiz Now</button>
+                }
             </div>
             <div className='video-container'>
                 <video autoPlay loop playsInline muted className='video'>

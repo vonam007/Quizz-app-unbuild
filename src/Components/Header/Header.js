@@ -1,7 +1,12 @@
 import './Header.scss'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { NavLink, useNavigate, Link } from 'react-router-dom';
 
 const Header = () => {
+
+
+    const account = useSelector(state => state.user.account);
+    const isAuthenticated = useSelector(state => state.user.isAuthenticated);
 
     const navigate = useNavigate();
 
@@ -21,25 +26,29 @@ const Header = () => {
                 <NavLink to='/admins'>Admin</NavLink>
             </div>
             <div className='rightNav'>
-                <button className='loginBtn Btn' onClick={() => handleLogin()}>Log in</button>
-                <button className='signupBtn Btn' onClick={() => handleSignUp()}>Sign up</button>
-                {/* <div className='dropdown'>
-                    <span>Settings</span>
-                    <div className='dropdown-content'>
-                        <div>
-                            <Link to='/'>Profile</Link>
-                        </div>
-                        <div>
-                            <Link to='/'>Login</Link>
-                        </div>
-                        <div>
-                            <Link to='/'>Logout</Link>
-                        </div>
-                        <div>
-                            <Link to='/'>Register</Link>
+
+                {isAuthenticated === false
+                    ?
+                    <>
+                        <button className='loginBtn Btn' onClick={() => handleLogin()}>Log in</button>
+                        <button className='signupBtn Btn' onClick={() => handleSignUp()}>Sign up</button>
+                    </>
+                    :
+                    <div className='dropdown'>
+                        <span>Settings</span>
+                        <div className='dropdown-content'>
+                            <div>
+                                <Link to='/'>Profile</Link>
+                            </div>
+                            <div>
+                                <Link to='/'>Logout</Link>
+                            </div>
                         </div>
                     </div>
-                </div> */}
+
+                }
+
+
             </div>
         </div >
     );

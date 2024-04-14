@@ -27,10 +27,10 @@ const Register = (props) => {
         if (!validateEmail(email)) {
             toast.error('Email is not valid');
         }
-        if (password.length < 8) {
+        if (password.length < 6) {
             toast.warn('Password must be at least 8 characters');
         }
-        if (!validateEmail(email) || password.length < 8) {
+        if (!validateEmail(email) || password.length < 6) {
             return;
         }
         //submit API

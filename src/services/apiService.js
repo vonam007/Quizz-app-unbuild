@@ -1,3 +1,4 @@
+
 import axios from '../utils/axiosCustomize';
 
 
@@ -48,7 +49,7 @@ const getAllUsers = () => {
 //Auth
 
 const postLogin = (email, password) => {
-    return axios.post('api/v1/login', { email, password });
+    return axios.post('api/v1/login', { email, password, delay: 3000 });
 }
 
 const postRegister = (email, username, password) => {
@@ -57,8 +58,15 @@ const postRegister = (email, username, password) => {
 }
 
 
+//get quiz
+const getQuizByUser = () => {
+    return axios.get('api/v1/quiz-by-participant');
+}
+
+
 export {
     postCreateNewUser, putEditUser, delDeleteUser,
     getUsersWithPaginate, getAllUsers,
-    postLogin, postRegister
+    postLogin, postRegister,
+    getQuizByUser
 }
