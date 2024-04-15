@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import App from './App';
 
 import Admin from './Components/Admin/Admin';
@@ -15,6 +15,29 @@ import Home from './Components/Home/Home';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ListQuiz from './Components/User/ListQuiz';
+import DetailQuiz from './Components/User/DetailQuiz';
+
+
+
+const NotFound = () => {
+    return (
+        <div className="NotFoundpage-container">
+            <div className="four_zero_four_bg">
+                <h1 className="text-center ">404</h1>
+            </div>
+
+            <div className="contant_box_404">
+                <h3 className="h2">
+                    Look like you're lost
+                </h3>
+                <p>The page you are looking for not available!</p>
+
+                <Link to={'/'} className="link_404">Go to Home</Link>
+            </div>
+        </div>
+
+    )
+}
 
 const Layout = () => {
 
@@ -26,12 +49,14 @@ const Layout = () => {
                     <Route index element={<Home />} />
                     <Route path='users' element={<ListQuiz />} />
                 </Route>
+                <Route path='quiz/:id' element={<DetailQuiz />} />
                 <Route path="admins" element={<Admin />}>
                     <Route index element={<DashBoard />} />
                     <Route path='manageUsers' element={<ManageUsers />} />
                 </Route>
                 <Route path='login' element={<Login />} />
                 <Route path='register' element={<Register />} />
+                <Route path='*' element={<NotFound />} />
             </Routes>
             <ToastContainer
                 position="top-right"

@@ -2,5 +2,54 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', 'Arvo', sans-serif;
+}
+
+.NotFoundpage-container {
+  padding: 40px 0;
+  background: #fff;
+  font-family: 'Arvo', serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  .four_zero_four_bg {
+    background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+    height: 400px;
+    width: 100%;
+    background-position: center;
+    text-align: center;
+
+    h1 {
+      font-size: 80px;
+      color: #ccc;
+      user-select: none;
+    }
+
+
+
+  }
+
+  .contant_box_404 {
+    h3 {
+      font-size: 2rem;
+    }
+
+    .link_404 {
+      color: #fff !important;
+      padding: 10px 20px;
+      background: #39ac31;
+      margin: 20px 0;
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 5px;
+
+      &:hover {
+        background: #308c29;
+        color: #fff !important;
+      }
+    }
+  }
 }

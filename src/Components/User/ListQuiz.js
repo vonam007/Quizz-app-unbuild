@@ -1,10 +1,12 @@
 import './ListQuiz.scss';
-import avt from '../../assets/bg2.jpg';
 import { useEffect, useState } from 'react';
 import { getQuizByUser } from '../../services/apiService';
+import { useNavigate } from 'react-router-dom';
 
 const ListQuiz = (props) => {
 
+
+    const navigate = useNavigate();
     const [arrQuiz, setArrQuiz] = useState([]);
     useEffect(() => {
         getQuiz()
@@ -16,10 +18,8 @@ const ListQuiz = (props) => {
         if (res && res.EC === 0) {
             setArrQuiz(res.DT);
         }
-        console.log(res.DT);
 
     }
-
     return (
         <div className='list-quiz-container'>
             {arrQuiz && arrQuiz.length > 0 && arrQuiz.map((quiz, index) => {
@@ -32,7 +32,9 @@ const ListQuiz = (props) => {
                             <h4><b>Quiz Number {index + 1}</b></h4>
                             <p>{quiz.description}</p>
                         </div>
-                        <button>Start Now</button>
+                        <button
+                            onClick={() => navigate(`/quiz/${quiz.id}`)}
+                        >Start Now</button>
                     </div>
                 )
             }
