@@ -2,6 +2,11 @@ import './Header.scss'
 import { useSelector } from 'react-redux';
 import { NavLink, useNavigate, Link } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+import { doLogout } from '../../redux/action/userAction';
+
+import NProgress from 'nprogress';
+
 const Header = () => {
 
 
@@ -9,12 +14,21 @@ const Header = () => {
     const isAuthenticated = useSelector(state => state.user.isAuthenticated);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLogin = () => {
         navigate('/login');
     }
     const handleSignUp = () => {
         navigate('/register');
+    }
+    const handleLogout = () => {
+        NProgress.start();
+        setTimeout(() => {
+            dispatch(doLogout());
+            navigate('/');
+        }, 1000);
+        NProgress.done();
     }
 
     return (
@@ -41,7 +55,7 @@ const Header = () => {
                                 <Link to='/'>Profile</Link>
                             </div>
                             <div>
-                                <Link to='/'>Logout</Link>
+                                <Link onClick={() => handleLogout()}>Logout</Link>
                             </div>
                         </div>
                     </div>

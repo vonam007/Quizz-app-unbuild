@@ -8,7 +8,6 @@ import ManageUsers from './Components/Admin/Content/ManageUsers';
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 
-import User from './Components/User/User';
 import Home from './Components/Home/Home';
 
 
