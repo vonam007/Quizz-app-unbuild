@@ -61,8 +61,8 @@ const Sidebars = () => {
 
                 />}>
                     <MenuItem className="sub" component={<Link to="/admins/manageUsers" />}>Quản lý Users</MenuItem>
-                    <MenuItem className="sub" component={<Link to="/e-commerce" />}>Quản lý bài Quiz</MenuItem>
-                    <MenuItem className="sub" component={<Link to="/e-commerce" />}>Quản lý câu hỏi</MenuItem>
+                    <MenuItem className="sub" component={<Link to="/admins/manageQuizzes" />}>Quản lý bài Quiz</MenuItem>
+                    <MenuItem className="sub" component={<Link to="/admins/manageQuestions" />}>Quản lý câu hỏi</MenuItem>
                 </SubMenu>
 
             </Menu>

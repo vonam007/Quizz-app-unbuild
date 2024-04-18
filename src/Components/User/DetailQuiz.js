@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { IoChevronBack } from "react-icons/io5";
-import { getQuizById } from "../../services/apiService";
+import { getQuizById, postSubmitQuiz } from "../../services/apiService";
 import _ from 'lodash';
+import { toast } from 'react-toastify';
 import './DetailQuiz.scss';
 
+
 import Question from "./Question";
+import ModalResult from "./ModalResult";
 
 const DetailQuiz = (props) => {
     const params = useParams();
@@ -15,7 +18,8 @@ const DetailQuiz = (props) => {
 
     const [quizData, setQuizData] = useState({});
     const [currentQuestion, setCurrentQuestion] = useState(0);
-
+    const [showModalResult, setShowModalResult] = useState(false);
+    const [dataResult, setDataResult] = useState({});
 
 
     useEffect(() => {
@@ -36,9 +40,10 @@ const DetailQuiz = (props) => {
                             questionDescription = element.description;
                             image = element.image;
                         }
+                        element.answers.isSelected = false;
                         answers.push(element.answers);
                     })
-                    return { questionID: key, answers, questionDescription, image }
+                    return { questionId: key, answers, questionDescription, image }
                 })
                 .value()
             setQuizData(handledData);
@@ -51,48 +56,125 @@ const DetailQuiz = (props) => {
     const handleNext = () => {
         setCurrentQuestion(currentQuestion >= quizData?.length - 1 ? quizData?.length - 1 : currentQuestion + 1);
     }
-    const handleFinish = () => {
-        navigate("/users");
+    const handleFinish = async () => {
+
+        let payload = {
+            quizId: +quizId,
+            answers: []
+        };
+        let answers = [];
+        if (quizData && quizData.length > 0) {
+            quizData.forEach(question => {
+                let qID = question.questionId;
+                let userAnswerId = [];
+
+                question.answers.forEach(answer => {
+                    if (answer.isSelected) {
+                        userAnswerId.push(answer.id);
+                    }
+                })
+                answers.push(
+                    {
+                        questionId: +qID,
+                        userAnswerId
+                    });
+            })
+        }
+
+        payload.answers = answers;
+
+        let response = await postSubmitQuiz(payload);
+
+        if (response && response.EC === 0) {
+            toast.success(`Quiz ${quizId} submitted successfully!`);
+            setDataResult({
+                countCorrect: response.DT.countCorrect,
+                countTotal: response.DT.countTotal,
+                quizData: response.DT.quizData
+            });
+            setTimeout(() => {
+                setShowModalResult(true);
+            }, 1000);
+        }
+        else {
+            toast.error(response.EM);
+        }
+    }
+
+
+
+
+    const handleCheckBox = (aid, qid) => {
+        let dataQuizClone = _.cloneDeep(quizData);
+        let ques = dataQuizClone.find(item => +item.questionId === +qid);
+        if (ques && ques.answers && ques.answers.length > 0) {
+            let temp = ques.answers.map(item => {
+                if (+item.id === +aid) {
+                    item.isSelected = !item.isSelected;
+                }
+                return item;
+            })
+            ques.answers = [...temp]
+
+        }
+
+        let index = dataQuizClone.findIndex(item => +item.questionId === +qid);
+        if (index > -1) {
+            dataQuizClone[index] = ques;
+            setQuizData(dataQuizClone)
+        }
+
     }
 
     return (
-        <div className="detail-quiz">
-            <div className="left-content">
-                <div className="qtitle">
-                    <IoChevronBack
-                        onClick={() => navigate("/users")}
-                        style={{ cursor: "pointer", transform: "translateY(5px)" }}
-                    />
-                    Quiz {quizId} - {location?.state?.quizTitle}
-                </div>
-                <Question
-                    index={currentQuestion}
-                    questionData=
-                    {
-                        quizData && quizData.length > 0
-                            ? quizData[currentQuestion]
-                            : []
-                    }
+        <>
+            {
+                showModalResult && <ModalResult
+                    dataResult={dataResult}
+                    isShowModal={showModalResult}
+                    setShowModal={setShowModalResult}
                 />
-                <div className="footer">
-                    <button className="prev-btn" onClick={() => handlePrev()}>Previous</button>
-                    <button className="next-btn" onClick={() => handleNext()}>Next</button>
-                    <button className="finish-btn" onClick={() => handleFinish()}>Finish</button>
+            }
+            <div className="detail-quiz">
+                <div className="left-content">
+                    <div className="qtitle">
+                        <IoChevronBack
+                            onClick={() => navigate("/users")}
+                            style={{ cursor: "pointer", transform: "translateY(5px)" }}
+                        />
+                        Quiz {quizId} - {location?.state?.quizTitle}
+                    </div>
+                    <Question
+                        handleCheckBox={handleCheckBox}
+                        index={currentQuestion}
+                        questionData=
+                        {
+                            quizData && quizData.length > 0
+                                ? quizData[currentQuestion]
+                                : []
+                        }
+                    />
+                    <div className="footer">
+                        <button className="prev-btn" onClick={() => handlePrev()}>Previous</button>
+                        <button className="next-btn" onClick={() => handleNext()}>Next</button>
+                        <button className="finish-btn" onClick={() => handleFinish()}>Finish</button>
+                    </div>
+                </div>
+                <div className="right-content">
+                    <div className="countDown">10:00</div>
+                    <div className="listQuestion">
+                        <ul>
+                            <li className="active">1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div className="right-content">
-                <div className="countDown">10:00</div>
-                <div className="listQuestion">
-                    <ul>
-                        <li className="active">1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        </>
+
     );
 }
 export default DetailQuiz;

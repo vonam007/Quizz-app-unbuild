@@ -36,8 +36,11 @@ const Header = () => {
             <div className='leftNav'>
                 <NavLink to='/' className="logo" >NamVo</NavLink>
                 <NavLink to='/'>Home</NavLink>
-                <NavLink to='/users'>Users</NavLink>
-                <NavLink to='/admins'>Admin</NavLink>
+                {
+                    account.role === 'ADMIN'
+                        ? <NavLink to='/admins'>Admin Dashboard</NavLink>
+                        : <NavLink to='/users'>Do Quiz</NavLink>
+                }
             </div>
             <div className='rightNav'>
 

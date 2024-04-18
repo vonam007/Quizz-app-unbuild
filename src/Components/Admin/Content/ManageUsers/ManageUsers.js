@@ -9,7 +9,7 @@ import ModalDeleteUser from "./ModalDeleteUser";
 import './ManageUsers.scss';
 
 // import TableUser from './TableUser';
-import { getAllUsers, getUsersWithPaginate } from '../../../services/apiService';
+import { getAllUsers, getUsersWithPaginate } from '../../../../services/apiService';
 import TableUserPaginate from "./TableUserPaginate";
 
 

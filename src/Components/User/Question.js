@@ -6,15 +6,25 @@ import { MdOutlineImageNotSupported } from "react-icons/md";
 
 const Question = (props) => {
     const { questionData, index } = props;
-    useEffect(() => {
-        document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
-            radio.checked = false;
-        });
-    }, [index]);
+    // useEffect(() => {
+    //     document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+    //         radio.checked = false;
+    //     });
+    // }, [index]);
 
 
     if (_.isEmpty(questionData)) {
         return <></>;
+    }
+
+
+    const handleOnchange = (e, aid, qid) => {
+        // let inputs = document.querySelectorAll('input[type="checkbox"]');
+        // inputs.forEach(function (input) {
+        //     input.checked = false;
+        // });
+        // e.target.checked = true;   
+        props.handleCheckBox(aid, qid);
     }
     return (
         <>
@@ -37,13 +47,19 @@ const Question = (props) => {
                             let widths = 100 / questionData.answers.length - 5; // 5% is the margin
                             return (
                                 <div className="answer" key={`${index}-answer`} style={{ width: `${widths}%` }}>
-                                    <input type="radio" id={`quesID-${index}`} name="question" value={index} />
+                                    <input
+                                        type='checkbox'
+                                        id={`quesID-${index}`}
+                                        name="question"
+                                        value={index}
+                                        checked={answer.isSelected}
+                                        onChange={(e) => handleOnchange(e, answer.id, questionData.questionId)}
+                                    />
                                     <label htmlFor={`quesID-${index}`}>{answer.description}</label>
                                 </div>
                             )
                         })
                     }
-
                 </div>
             </div>
         </>

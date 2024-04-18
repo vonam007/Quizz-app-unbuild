@@ -3,7 +3,7 @@ import './Modal.scss';
 import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { toast } from 'react-toastify';
-import { delDeleteUser } from '../../../services/apiService';
+import { delDeleteUser } from '../../../../services/apiService';
 
 const ModalDeleteUser = (props) => {
 

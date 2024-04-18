@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
+
+    const role = useSelector(state => state.user.account.role);
     const isAuthenticated = useSelector(state => state.user.isAuthenticated);
     const navigate = useNavigate();
     return (
@@ -15,7 +17,14 @@ const Home = () => {
                 <p>This is a demo application for testing project</p>
                 {isAuthenticated === false
                     ? <button className='getStart-Btn' onClick={() => navigate('/login')}>Get Start</button>
-                    : <button className='getStart-Btn' onClick={() => navigate('/users')}>Doing Quiz Now</button>
+                    :
+                    <>
+                        {
+                            role === 'USER'
+                                ? <button className='getStart-Btn' onClick={() => navigate('/users')}>Do Quiz</button>
+                                : <button className='getStart-Btn' onClick={() => navigate('/admins')}>Dashboard</button>
+                        }
+                    </>
                 }
             </div>
             <div className='video-container'>

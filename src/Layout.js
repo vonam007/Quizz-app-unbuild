@@ -2,19 +2,21 @@ import { Routes, Route, Link } from 'react-router-dom';
 import App from './App';
 
 import Admin from './Components/Admin/Admin';
-import DashBoard from './Components/Admin/Content/DashBoard';
-import ManageUsers from './Components/Admin/Content/ManageUsers';
+import DashBoard from './Components/Admin/Content/ManageDashboard/DashBoard';
+import ManageUsers from './Components/Admin/Content/ManageUsers/ManageUsers';
+import ManageQuizzes from './Components/Admin/Content/ManageQuizzes/ManageQuizzes';
+import ManageQuestions from './Components/Admin/Content/ManageQuestions/ManageQuestions';
+import ListQuiz from './Components/User/ListQuiz';
+import DetailQuiz from './Components/User/DetailQuiz';
 
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 
 import Home from './Components/Home/Home';
 
-
 import { ToastContainer } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
-import ListQuiz from './Components/User/ListQuiz';
-import DetailQuiz from './Components/User/DetailQuiz';
 
 
 
@@ -40,7 +42,6 @@ const NotFound = () => {
 
 const Layout = () => {
 
-
     return (
         <>
             <Routes>
@@ -52,6 +53,8 @@ const Layout = () => {
                 <Route path="admins" element={<Admin />}>
                     <Route index element={<DashBoard />} />
                     <Route path='manageUsers' element={<ManageUsers />} />
+                    <Route path='manageQuizzes' element={<ManageQuizzes />} />
+                    <Route path='manageQuestions' element={<ManageQuestions />} />
                 </Route>
                 <Route path='login' element={<Login />} />
                 <Route path='register' element={<Register />} />

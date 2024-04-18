@@ -40,7 +40,12 @@ const Login = (props) => {
             toast.success(res.EM + ', Redirecting home...');
             setIsLoading(false);
             setTimeout(() => {
-                navigate('/');
+                if (res.DT.role === 'ADMIN') {
+                    navigate('/admins');
+                }
+                else {
+                    navigate('/');
+                }
             }, 1000);
         }
         else if (res && res.EC !== 0) {

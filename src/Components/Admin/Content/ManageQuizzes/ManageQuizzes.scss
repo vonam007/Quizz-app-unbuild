@@ -1,0 +1,21 @@
+.quiz-container {
+    .title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 20px 0 20px 10px;
+    }
+
+    .add-a-quiz {
+        width: 90%;
+        border-radius: 10px;
+        margin: 20px auto;
+
+        legend {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-left: 1rem;
+            padding: 0 10px;
+        }
+    }
+
+}
