@@ -2,12 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
 .Admin-container {
     display: flex;
     flex-direction: row;
+
 
     .Admin-Content {
         width: 100%;
@@ -22,6 +22,11 @@
             h1 {
                 line-height: 50px;
             }
+        }
+
+        .Admin-main {
+            width: 100%;
+            height: calc(100vh - 50px);
         }
     }
 

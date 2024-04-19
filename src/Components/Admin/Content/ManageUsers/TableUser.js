@@ -37,7 +37,7 @@ const TableUser = (props) => {
                         })
                     }
 
-                    {listUser && listUser.length === 0 && <tr><td colSpan="5" style={{ textAlign: "center" }}>Not Found Data</td></tr>}
+                    {(!listUser || listUser?.length === 0) && <tr><td colSpan="5" style={{ textAlign: "center" }}>Not Found Data</td></tr>}
                 </tbody>
             </table>
         </>

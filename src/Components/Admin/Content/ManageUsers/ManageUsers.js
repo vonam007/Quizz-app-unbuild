@@ -15,14 +15,14 @@ import TableUserPaginate from "./TableUserPaginate";
 
 const ManageUsers = (props) => {
 
-    const LIMIT_USER_PER_PAGE = 3;
+    const LIMIT_USER_PER_PAGE = 5;
 
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
     const [showModalCreate, setShowModalCreate] = useState(false);
-    const [showModalEdit, setShowModalEdit] = useState(false);
     const [showModalView, setShowModalView] = useState(false);
+    const [showModalEdit, setShowModalEdit] = useState(false);
     const [showModalDelete, setShowModalDelete] = useState(false);
 
     const [listUser, setListUser] = useState([]);
@@ -71,6 +71,10 @@ const ManageUsers = (props) => {
                 setCurrentPage={setCurrentPage}
             //fetchListUsersWithPaginate={fetchListUsersWithPaginate}
             />}
+            {showModalView && <ModalViewUser
+                setShowModal={setShowModalView}
+                user={UserView}
+            />}
             {showModalEdit && <ModalUpdateUser
                 setShowModal={setShowModalEdit}
                 UserEdit={UserEdit}
@@ -78,10 +82,6 @@ const ManageUsers = (props) => {
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
             //fetchListUsersWithPaginate={fetchListUsersWithPaginate}
-            />}
-            {showModalView && <ModalViewUser
-                setShowModal={setShowModalView}
-                user={UserView}
             />}
             {showModalDelete && <ModalDeleteUser
                 setShowModal={setShowModalDelete}

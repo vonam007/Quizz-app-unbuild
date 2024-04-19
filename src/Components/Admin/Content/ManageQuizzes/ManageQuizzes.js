@@ -1,74 +1,97 @@
 import './ManageQuizzes.scss'
 import './inputMagic.scss'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import { postCreateNewQuiz, getAllQuizzesByAdmin } from '../../../../services/apiService'
+import TableQuiz from './TableQuiz'
+import AddNewQuiz from './AddNewQuiz'
+
+import ModalUpdateQuiz from './ModalEditQuiz'
+import ModalDeleteQuiz from './ModalDeleteQuiz'
+
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+
 const ManageQuizzes = () => {
 
+    //add quiz
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [difficulty, setDifficulty] = useState('')
     const [quizImage, setQuizImage] = useState(null)
 
-
+    //quiz table
+    const [listQuiz, setListQuiz] = useState([])
 
     useEffect(() => {
-        let temp = document.getElementById('difficulty-select');
-        let temp2 = document.querySelectorAll('.did-floating-input')
-        if (temp.value === "") {
-            temp.classList.add('did-floating-select-empty')
+        fetchAllQuizzes()
+    }, [])
+
+    const fetchAllQuizzes = async () => {
+        let res = await getAllQuizzesByAdmin()
+        if (res && res.EC === 0) {
+            setListQuiz(res.DT)
         }
         else {
-            temp.classList.remove('did-floating-select-empty')
+            toast.error(res.EM)
         }
-        temp2.forEach((element) => {
-            if (element.value === "") {
-                element.classList.add('did-floating-input-empty')
-            }
-            else {
-                element.classList.remove('did-floating-input-empty')
-            }
-        })
-    }, [difficulty, description, name])
+    }
+    //modal edit/delete
+    const [showModalEdit, setShowModalEdit] = useState(false);
+    const [showModalDelete, setShowModalDelete] = useState(false);
+
+    const [quizEdit, setQuizEdit] = useState({});
+    const [quizDelete, setQuizDelete] = useState({});
+
+    const handleClickEditBtn = (quiz) => {
+        setQuizEdit(quiz)
+        setShowModalEdit(true)
+    }
+    const handleClickDeleteBtn = (quiz) => {
+        setQuizDelete(quiz)
+        setShowModalDelete(true)
+    }
+
 
 
     return (
         <div className="quiz-container">
-            <div className="title">
-                Manage Quizzes
-            </div>
-            <fieldset className="add-a-quiz">
-                <legend> Add A Quiz</legend>
-                <div className='form-content'>
-                    <div className="did-floating-label-content">
-                        <input className="did-floating-input" type="text" value={name} onChange={(e) => setName(e.target.value)} />
-                        <label className="did-floating-label">Quiz title</label>
-                    </div>
-                    <div className="did-floating-label-content">
-                        <input className="did-floating-input" type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-                        <label className="did-floating-label">Quiz description</label>
-                    </div>
-                    <div className="did-floating-label-content">
-                        <select className="did-floating-select" id='difficulty-select'
-                            value={difficulty}
-                            onChange={(e) => {
-                                setDifficulty(e.target.value)
-                            }}
-                        >
-                            <option value={""}></option>
-                            <option value={"EASY"}>EASY</option>
-                            <option value={"MEDIUM"}>MEDIUM</option>
-                            <option value={"HARD"}>HARD</option>
-                        </select>
-                        <label className="did-floating-label">Difficulty</label>
-                    </div>
-                    <div className="did-floating-label-content">
-                        <input className="did-floating-input-file" type="file" placeholder=" " />
-                        <label className="did-floating-label">Upload Image</label>
-                    </div>
-                </div>
-            </fieldset>
-            <div className="list-quiz">
-                A table will here
-            </div>
+            {showModalEdit && <ModalUpdateQuiz
+                setShowModal={setShowModalEdit}
+                quiz={quizEdit}
+                fetchAllQuizzes={fetchAllQuizzes}
+            />}
+            {showModalDelete && <ModalDeleteQuiz
+                setShowModal={setShowModalDelete}
+                quiz={quizDelete}
+                fetchAllQuizzes={fetchAllQuizzes}
+            />}
+            <Tabs>
+                <TabList>
+                    <Tab>Table Quizzes</Tab>
+                    <Tab>Add Quizzes</Tab>
+                </TabList>
+                <TabPanel className="list-quiz">
+                    <TableQuiz
+                        listQuiz={listQuiz}
+                        handleClickEditBtn={handleClickEditBtn}
+                        handleClickDeleteBtn={handleClickDeleteBtn}
+                    />
+                </TabPanel>
+                <TabPanel>
+                    <AddNewQuiz
+                        name={name}
+                        setName={setName}
+                        description={description}
+                        setDescription={setDescription}
+                        difficulty={difficulty}
+                        setDifficulty={setDifficulty}
+                        quizImage={quizImage}
+                        setQuizImage={setQuizImage}
+                        fetchAllQuizzes={fetchAllQuizzes}
+                    />
+                </TabPanel>
+            </Tabs>
         </div>
     );
 }
