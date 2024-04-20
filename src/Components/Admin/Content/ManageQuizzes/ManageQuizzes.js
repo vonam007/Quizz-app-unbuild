@@ -2,7 +2,7 @@ import './ManageQuizzes.scss'
 import './inputMagic.scss'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { postCreateNewQuiz, getAllQuizzesByAdmin } from '../../../../services/apiService'
+import { getAllQuizzesByAdmin } from '../../../../services/apiService'
 import TableQuiz from './TableQuiz'
 import AddNewQuiz from './AddNewQuiz'
 
