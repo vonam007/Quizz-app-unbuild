@@ -136,6 +136,8 @@ const DetailQuiz = (props) => {
                 />
             }
             <div className="detail-quiz">
+
+
                 <div className="left-content">
                     <div className="qtitle">
                         <IoChevronBack
@@ -144,6 +146,13 @@ const DetailQuiz = (props) => {
                         />
                         Quiz {quizId} - {location?.state?.quizTitle}
                     </div>
+                    {
+                        quizData && quizData.length === 0 &&
+                        <div className="no-quiz" onClick={() => navigate('/users')}>
+                            No question in this quiz <br />	&nbsp;	&nbsp;&lt;--Back to quiz list
+                        </div>
+
+                    }
                     <Question
                         handleCheckBox={handleCheckBox}
                         index={currentQuestion}

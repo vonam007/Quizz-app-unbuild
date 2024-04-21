@@ -1,6 +1,5 @@
 import Select from 'react-select';
 import { useEffect, useState } from 'react';
-import './ManageQuestions.scss';
 import { v4 as uuidv4 } from 'uuid'
 import _ from 'lodash';
 
@@ -11,7 +10,7 @@ import ModalImagePreview from './ModalImagePreview';
 import { toast } from 'react-toastify'
 import { getAllQuizzesByAdmin, postCreateNewAnswer, postCreateNewQuestion } from '../../../../services/apiService'
 
-const ManageQuestions = () => {
+const UpdateQA = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [imagePreview, setImagePreview] = useState(null)
@@ -33,11 +32,13 @@ const ManageQuestions = () => {
         }]
     const [questions, setQuestions] = useState(INIT_QUESTION);
 
-    const [listQuiz, setListQuiz] = useState([])
+    const [selectedQuiz, setSelectedQuiz] = useState({});
+    const [listQuiz, setListQuiz] = useState([]);
 
     useEffect(() => {
         fetchAllQuizzes()
     }, [])
+
     const fetchAllQuizzes = async () => {
         let res = await getAllQuizzesByAdmin()
         if (res && res.EC === 0) {
@@ -56,7 +57,6 @@ const ManageQuestions = () => {
     }
 
 
-    const [selectedQuiz, setSelectedQuiz] = useState({});
 
 
     const HandleAddRemoveQuestion = (method, questionId = "") => {
@@ -175,7 +175,6 @@ const ManageQuestions = () => {
 
     }
     const handleShowPreviewIMG = (questiom) => {
-
         setShowModal(true)
         setImagePreview(questiom.image)
 
@@ -190,7 +189,6 @@ const ManageQuestions = () => {
                     setImagePreview={setImagePreview}
                 />
             }
-            <div className="title">Manage Questions</div>
             <div className='add-new-questions'>
                 <div className='select-quiz-option'>
                     <label>Select Quiz:</label>
@@ -296,4 +294,4 @@ const ManageQuestions = () => {
         </div>
     );
 }
-export default ManageQuestions;
+export default UpdateQA;

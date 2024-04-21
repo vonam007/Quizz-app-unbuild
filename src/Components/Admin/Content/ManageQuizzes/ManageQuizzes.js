@@ -8,6 +8,8 @@ import AddNewQuiz from './AddNewQuiz'
 
 import ModalUpdateQuiz from './ModalEditQuiz'
 import ModalDeleteQuiz from './ModalDeleteQuiz'
+import UpdateQA from './UpdateQA'
+import AssignQuiz from './AssignQuiz'
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -70,8 +72,10 @@ const ManageQuizzes = () => {
                 <TabList>
                     <Tab>Table Quizzes</Tab>
                     <Tab>Add Quizzes</Tab>
+                    <Tab>Update Q/A Quizzes</Tab>
+                    <Tab>Assign Quizzes to USER</Tab>
                 </TabList>
-                <TabPanel className="list-quiz">
+                <TabPanel>
                     <TableQuiz
                         listQuiz={listQuiz}
                         handleClickEditBtn={handleClickEditBtn}
@@ -90,6 +94,12 @@ const ManageQuizzes = () => {
                         setQuizImage={setQuizImage}
                         fetchAllQuizzes={fetchAllQuizzes}
                     />
+                </TabPanel>
+                <TabPanel>
+                    <UpdateQA />
+                </TabPanel>
+                <TabPanel>
+                    <AssignQuiz />
                 </TabPanel>
             </Tabs>
         </div>

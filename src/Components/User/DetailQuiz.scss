@@ -13,6 +13,14 @@
         align-items: center;
         margin: 20px;
 
+        .no-quiz {
+            font-size: 30px;
+            font-weight: bold;
+            color: #bebebe;
+            user-select: none;
+            cursor: pointer;
+        }
+
         .qtitle {
             font-size: 40px;
             font-weight: bold;

@@ -93,7 +93,7 @@ const ManageUsers = (props) => {
             />}
 
             <div className="title">
-                <h1>Admin Manage Users</h1>
+                <h1>Users Management</h1>
             </div>
             <div className="content">
                 <button className="add-user-btn" onClick={() => setShowModalCreate(!showModalCreate)}>

@@ -122,6 +122,11 @@ const postCreateNewAnswer = (description, correct_answer, question_id) => {
     return axios.post('api/v1/answer', { description, correct_answer, question_id });
 
 }
+
+
+const postAssignQuiz = (quizId, userId) => {
+    return axios.post('api/v1/quiz-assign-to-user', { quizId, userId });
+}
 export {
     postCreateNewUser, putEditUser, delDeleteUser,
     getUsersWithPaginate, getAllUsers,
@@ -129,5 +134,6 @@ export {
     getQuizByUser, getQuizById,
     postSubmitQuiz, postCreateNewQuiz, delDeleteQuiz, putEditQuiz,
     getAllQuizzesByAdmin,
-    postCreateNewQuestion, postCreateNewAnswer
+    postCreateNewQuestion, postCreateNewAnswer,
+    postAssignQuiz
 }
