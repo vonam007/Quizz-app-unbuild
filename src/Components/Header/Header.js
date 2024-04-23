@@ -1,14 +1,9 @@
 import './Header.scss'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useNavigate, Link } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
-import { doLogout } from '../../redux/action/userAction';
-
-import { postLogout } from '../../services/apiService';
-
-import NProgress from 'nprogress';
-import { toast } from 'react-toastify';
+import SettingDropDown from './SettingDropDown';
+import ChooseLanguage from './ChooseLanguage';
 
 const Header = () => {
 
@@ -17,7 +12,6 @@ const Header = () => {
     const isAuthenticated = useSelector(state => state.user.isAuthenticated);
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const handleLogin = () => {
         navigate('/login');
@@ -25,26 +19,7 @@ const Header = () => {
     const handleSignUp = () => {
         navigate('/register');
     }
-    const handleLogout = async () => {
-        // NProgress.start();
-        // let res = await postLogout(account.email, account.refresh_token);
-        // if (res && res.EC === 0) {
-        //     setTimeout(() => {
-        //         dispatch(doLogout());
-        //         navigate('/login');
-        //     }, 1000);
-        //     toast.success(res.EM);
-        // }
-        // else {
-        //     toast.error(res.EM);
-        // }
-        // NProgress.done();
-        setTimeout(() => {
-            dispatch(doLogout());
-            navigate('/login');
-        }, 1000);
 
-    }
 
     return (
         <div className='Nav'>
@@ -66,19 +41,10 @@ const Header = () => {
                         <button className='signupBtn Btn' onClick={() => handleSignUp()}>Sign up</button>
                     </>
                     :
-                    <div className='dropdown'>
-                        <span>Settings</span>
-                        <div className='dropdown-content'>
-                            <div>
-                                <Link to='/'>Profile</Link>
-                            </div>
-                            <div>
-                                <Link onClick={() => handleLogout()}>Logout</Link>
-                            </div>
-                        </div>
-                    </div>
+                    <SettingDropDown />
 
                 }
+                <ChooseLanguage />
 
 
             </div>

@@ -13,6 +13,10 @@
         width: 100%;
 
         .Admin-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: center;
             height: 50px;
             width: 100%;
             padding: 0 10px;
@@ -21,6 +25,25 @@
 
             h1 {
                 line-height: 50px;
+            }
+
+            .r-nav {
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+                font-weight: 700;
+
+                .choose-language {
+                    .absolute-div {
+                        .choose-language__item {
+                            color: white;
+
+                            &:hover {
+                                color: rgba(0, 16, 63, 0.8);
+                            }
+                        }
+                    }
+                }
             }
         }
 

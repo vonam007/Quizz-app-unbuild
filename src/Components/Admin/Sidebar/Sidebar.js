@@ -16,7 +16,7 @@ const Sidebars = () => {
 
     return (
 
-        <Sidebar collapsed={isCollapsed} className='sidebar-container' style={{ backgroundImage: `url(${bgImg})`, backgroundSize: `contain` }}>
+        <Sidebar collapsed={isCollapsed} className='sidebar-container' style={{ backgroundColor: `#322C2B` }}>
             <div className='collapseMenuBtn'>
                 <AiOutlineMenu className='btn' onClick={() => setIsCollapsed(!isCollapsed)} />
             </div>
@@ -60,9 +60,9 @@ const Sidebars = () => {
                     }}
 
                 />}>
-                    <MenuItem className="sub" component={<Link to="/admins/manageUsers" />}>Quản lý Users</MenuItem>
-                    <MenuItem className="sub" component={<Link to="/admins/manageQuizzes" />}>Quản lý bài Quiz</MenuItem>
-                    <MenuItem className="sub" component={<Link to="/admins/manageQuestions" />}>Quản lý câu hỏi</MenuItem>
+                    <MenuItem className="sub" component={<Link to="/admins/manageUsers" />}>Users Management</MenuItem>
+                    <MenuItem className="sub" component={<Link to="/admins/manageQuizzes" />}>Quizzes Management</MenuItem>
+                    <MenuItem className="sub" component={<Link to="/admins/manageQuestions" />}>Questions Management</MenuItem>
                 </SubMenu>
 
             </Menu>

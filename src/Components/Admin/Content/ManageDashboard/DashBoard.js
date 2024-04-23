@@ -1,8 +1,11 @@
+import './DashBoard.scss';
+
+
 const DashBoard = (props) => {
 
     return (
-        <div>
-            <h1>Dashboard</h1>
+        <div className='dashBoard-container'>
+            <h1>Analytics Dashboard</h1>
         </div>
     )
 }

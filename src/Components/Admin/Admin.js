@@ -5,6 +5,9 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import ChooseLanguage from '../Header/ChooseLanguage';
+import SettingDropDown from '../Header/SettingDropDown';
+
 
 
 const Admin = (props) => {
@@ -23,12 +26,10 @@ const Admin = (props) => {
             </div>
             <div className='Admin-Content'>
                 <div className="Admin-header">
-                    {
-                        pathname === '/manageUsers' ? <h1>Manage Users</h1> :
-                            pathname === '/manageQuizzes' ? <h1>Manage Quizzes</h1> :
-                                pathname === '/manageQuestions' ? <h1>Manage Questions</h1> :
-                                    <h1>Dashboard</h1>
-                    }
+                    <div className="r-nav">
+                        <SettingDropDown />
+                        <ChooseLanguage />
+                    </div>
                 </div>
                 <div className="Admin-main">
                     <PerfectScrollbar>

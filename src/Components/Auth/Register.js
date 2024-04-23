@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { postRegister } from '../../services/apiService'
 import { toast } from 'react-toastify';
 import { BiShow, BiHide } from "react-icons/bi";
+import ChooseLanguage from '../Header/ChooseLanguage';
 
 const Register = (props) => {
     const [email, setEmail] = useState('');
@@ -51,7 +52,7 @@ const Register = (props) => {
     return (
         <div className="login-container">
             <div className='Header'>
-                Already have an account? <Link to="/login">Log in</Link> <span>Need help?</span>
+                Already have an account? <Link to="/login">Log in</Link> <span>Need help?</span> <ChooseLanguage />
             </div>
             <div className='Content'>
                 <div className='Welcome'>

@@ -68,6 +68,7 @@ const ManageQuizzes = () => {
                 quiz={quizDelete}
                 fetchAllQuizzes={fetchAllQuizzes}
             />}
+            <h1>Manage Quizzes</h1>
             <Tabs>
                 <TabList>
                     <Tab>All Quizzes</Tab>

@@ -5,7 +5,7 @@ import { postLogin } from '../../services/apiService'
 import { toast } from 'react-toastify';
 import { BiShow, BiHide } from "react-icons/bi";
 import { CgSpinner } from "react-icons/cg";
-
+import ChooseLanguage from '../Header/ChooseLanguage';
 
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../../redux/action/userAction';
@@ -59,7 +59,7 @@ const Login = (props) => {
     return (
         <div className="login-container">
             <div className='Header'>
-                Don't have an account? <Link to="/register">Sign up</Link> <span>Need help?</span>
+                Don't have an account? <Link to="/register">Sign up</Link> <span>Need help?</span> <ChooseLanguage />
             </div>
             <div className='Content'>
                 <div className='Welcome'>
