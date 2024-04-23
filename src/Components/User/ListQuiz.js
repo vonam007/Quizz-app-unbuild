@@ -22,36 +22,39 @@ const ListQuiz = (props) => {
 
     }
     return (
-        <div className='list-quiz-container'>
-            {arrQuiz && arrQuiz.length > 0 && arrQuiz.map((quiz, index) => {
-                return (
-                    <div key={`${index}-quiz`} className="card">
 
-                        <span>
-                            <div className='card-img-holder'>
-                                <img src={`data:image/png;base64,${quiz.image}`} alt="Avatar" style={{ width: "100%" }} />
-                            </div>
-                            <div className="card-info">
-                                <h4><b>Quiz Number {index + 1}</b></h4>
-                                <p>{quiz.description}</p>
-                            </div>
+        <div className='center-list-quiz'>
+            <div className='list-quiz-container'>
+                {arrQuiz && arrQuiz.length > 0 && arrQuiz.map((quiz, index) => {
+                    return (
+                        <div key={`${index}-quiz`} className="card">
 
-                        </span>
-                        <button
-                            onClick={() => navigate(`/quiz/${quiz.id}`, { state: { quizTitle: quiz.description } })}
-                        >Start Now</button>
+                            <span>
+                                <div className='card-img-holder'>
+                                    <img src={`data:image/png;base64,${quiz.image}`} alt="Avatar" style={{ width: "100%" }} />
+                                </div>
+                                <div className="card-info">
+                                    <h4><b>Quiz Number {index + 1}</b></h4>
+                                    <p>{quiz.description}</p>
+                                </div>
 
-                    </div>
-                )
-            }
-            )}
+                            </span>
+                            <button
+                                onClick={() => navigate(`/quiz/${quiz.id}`, { state: { quizTitle: quiz.description } })}
+                            >Start Now</button>
 
-            {isAuthenticated && arrQuiz && arrQuiz.length === 0
-                ?
-                <div className='no-quiz'>You have no quiz now...</div>
-                :
-                isAuthenticated === false && <div className='no-quiz'>Please login to see your quiz</div>
-            }
+                        </div>
+                    )
+                }
+                )}
+
+                {isAuthenticated && arrQuiz && arrQuiz.length === 0
+                    ?
+                    <div className='no-quiz'>You have no quiz now...</div>
+                    :
+                    isAuthenticated === false && <div className='no-quiz'>Please login to see your quiz</div>
+                }
+            </div>
         </div>
 
     );

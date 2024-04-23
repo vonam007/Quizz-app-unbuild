@@ -17,7 +17,7 @@ const TableUserPaginate = (props) => {
             await fetchListUsersWithPaginate(currentPage);
         }
         refreshTable(currentPage);
-    }, [currentPage, fetchListUsersWithPaginate])
+    }, [currentPage])
 
 
     return (

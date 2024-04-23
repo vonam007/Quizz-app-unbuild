@@ -76,6 +76,11 @@ const Login = (props) => {
                                 id='Email'
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        handleLogin();
+                                    }
+                                }}
                             />
                         </div>
                         <div className='inputInfo password-group'>
@@ -85,6 +90,11 @@ const Login = (props) => {
                                 placeholder='At least 8 characters'
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        handleLogin();
+                                    }
+                                }}
                             />
                             <span className='show-password'>
                                 {showPassword ? < BiHide onClick={() => setShowPassword(false)} /> : < BiShow onClick={() => setShowPassword(true)} />}</span>

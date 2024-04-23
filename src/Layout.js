@@ -9,6 +9,8 @@ import ManageQuestions from './Components/Admin/Content/ManageQuestions/ManageQu
 import ListQuiz from './Components/User/ListQuiz';
 import DetailQuiz from './Components/User/DetailQuiz';
 
+import PrivateRoutes from './routes/PrivateRoutes';
+
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 
@@ -49,8 +51,15 @@ const Layout = () => {
                     <Route index element={<Home />} />
                     <Route path='users' element={<ListQuiz />} />
                 </Route>
-                <Route path='quiz/:id' element={<DetailQuiz />} />
-                <Route path="admins" element={<Admin />}>
+                <Route path='quiz/:id' element={
+                    <PrivateRoutes>
+                        <DetailQuiz />
+                    </PrivateRoutes>} />
+                <Route path="admins" element={
+                    <PrivateRoutes>
+                        <Admin />
+                    </PrivateRoutes>
+                }>
                     <Route index element={<DashBoard />} />
                     <Route path='manageUsers' element={<ManageUsers />} />
                     <Route path='manageQuizzes' element={<ManageQuizzes />} />

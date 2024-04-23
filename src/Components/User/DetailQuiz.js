@@ -8,6 +8,7 @@ import './DetailQuiz.scss';
 
 
 import Question from "./Question";
+import QuestionCountDown from "./QuestionCountDown";
 import ModalResult from "./ModalResult";
 
 const DetailQuiz = (props) => {
@@ -170,16 +171,13 @@ const DetailQuiz = (props) => {
                     </div>
                 </div>
                 <div className="right-content">
-                    <div className="countDown">10:00</div>
-                    <div className="listQuestion">
-                        <ul>
-                            <li className="active">1</li>
-                            <li>2</li>
-                            <li>3</li>
-                            <li>4</li>
-                            <li>5</li>
-                        </ul>
-                    </div>
+                    <QuestionCountDown
+                        quizData={quizData}
+                        handleFinish={handleFinish}
+                        currentQuestion={currentQuestion}
+                        setCurrentQuestion={setCurrentQuestion}
+                    // currentQuestion={currentQuestion}
+                    />
                 </div>
             </div>
         </>

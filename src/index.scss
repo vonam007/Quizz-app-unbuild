@@ -3,10 +3,12 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', 'Arvo', sans-serif;
+
 }
 
 body {
   overflow: hidden;
+  background-color: #f5f5f5;
 }
 
 .NotFoundpage-container {
@@ -54,6 +56,14 @@ body {
         background: #308c29;
         color: #fff !important;
       }
+    }
+  }
+}
+
+.App {
+  .main-container {
+    .app-content {
+      height: 100vh;
     }
   }
 }

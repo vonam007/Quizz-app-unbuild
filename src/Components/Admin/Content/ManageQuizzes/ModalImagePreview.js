@@ -5,8 +5,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const ModalImagePreview = (props) => {
 
-    const { imagePreview, setImagePreview, setShowModal } = props;
-
+    const { imagePreview, setShowModal } = props;
     const [announce, setAnnounce] = useState(false);
 
     const backdropClick = () => {
@@ -38,11 +37,19 @@ const ModalImagePreview = (props) => {
                 </div>
                 <div className="modal-content">
                     <div className="modal-image">
-                        <img src={URL.createObjectURL(imagePreview)} alt="preview" />
+                        <img
+                            src={URL.createObjectURL(imagePreview)}
+                            alt="preview"
+                        />
                     </div>
                     <div className='modal-image-info'>
-                        <span> Name: {imagePreview?.name}</span>
-                        <span> Size: ~{Math.floor(imagePreview?.size / 1024)} KB</span>
+                        <span> Name: {imagePreview?.name ? imagePreview.name : 'No Name'}</span>
+                        {
+                            (!imagePreview.size || imagePreview.size === undefined)
+                                ? <span> Size: Unknown</span>
+                                : <span> Size: ~{Math.floor(+imagePreview?.size / 1024)} KB</span>
+                        }
+
                     </div>
                 </div>
                 <div className="modal-footer">

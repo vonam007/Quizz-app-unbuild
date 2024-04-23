@@ -8,7 +8,7 @@ import { AiFillMinusSquare } from "react-icons/ai";
 import { LuImagePlus } from "react-icons/lu";
 import ModalImagePreview from './ModalImagePreview';
 import { toast } from 'react-toastify'
-import { getAllQuizzesByAdmin, postCreateNewAnswer, postCreateNewQuestion } from '../../../../services/apiService'
+import { postUpsertQA, getAllQuizzesByAdmin, postCreateNewAnswer, postCreateNewQuestion, getQuizWithQA } from '../../../../services/apiService'
 
 const UpdateQA = () => {
 
@@ -20,7 +20,7 @@ const UpdateQA = () => {
         [{
             id: uuidv4(),
             description: '',
-            image: '',
+            imageFile: '',
             imageName: '',
             answers: [
                 {
@@ -30,14 +30,72 @@ const UpdateQA = () => {
                 }
             ]
         }]
-    const [questions, setQuestions] = useState(INIT_QUESTION);
 
+    const [questions, setQuestions] = useState(INIT_QUESTION);
     const [selectedQuiz, setSelectedQuiz] = useState({});
     const [listQuiz, setListQuiz] = useState([]);
 
     useEffect(() => {
         fetchAllQuizzes()
     }, [])
+
+    useEffect(() => {
+        if (selectedQuiz && selectedQuiz.value) {
+            fetchQuizWithQA()
+        }
+    }, [selectedQuiz])
+
+    const urltoFile = (url, filename, mimeType) => {
+        return (fetch(url)
+            .then(function (res) { return res.arrayBuffer(); })
+            .then(function (buf) { return new File([buf], filename, { type: mimeType }); })
+        );
+    }
+    const fileToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
+
+
+    const fetchQuizWithQA = async () => {
+        let res = await getQuizWithQA(selectedQuiz.value)
+        if (res && res.EC === 0) {
+
+
+            let tempQuestions = res.DT.qa
+            let ques = [];
+            if (tempQuestions.length === 0) {
+                ques = INIT_QUESTION
+            }
+            else {
+                for (const question of tempQuestions) {
+
+                    if (question.imageFile) {
+                        let url = `data:image/png;base64,${question.imageFile}`
+                        let filename = `Question-${question.id}.png`
+                        let mimeType = 'image/png'
+                        question.imageFile = await urltoFile(url, filename, mimeType)
+                        question.imageName = filename
+                    }
+                    ques.push({
+                        id: question.id,
+                        description: question.description,
+                        imageFile: question.imageFile,
+                        imageName: question.imageName,
+                        answers: question.answers
+                    })
+                }
+            }
+            setQuestions(ques)
+        }
+        else {
+            toast.error(res.EM)
+        }
+    }
 
     const fetchAllQuizzes = async () => {
         let res = await getAllQuizzesByAdmin()
@@ -112,7 +170,7 @@ const UpdateQA = () => {
             case 'QUESTION-IMAGE':
                 if (value && value.target && value.target.files && value.target.files.length > 0) {
                     questionClone[index].imageName = value.target.files[0].name
-                    questionClone[index].image = value.target.files[0]
+                    questionClone[index].imageFile = value.target.files[0]
                     setQuestions(questionClone)
                 }
                 return;
@@ -130,9 +188,7 @@ const UpdateQA = () => {
         }
     }
 
-    const HandleSubmitQuestionsForQuiz = async () => {
-
-
+    const HandleUpsertQuestionsForQuiz = async () => {
         //validate
         if (_.isEmpty(selectedQuiz)) {
             toast.error('Please select a quiz')
@@ -150,34 +206,34 @@ const UpdateQA = () => {
                 }
             }
         }
+        let questionClone = _.cloneDeep(questions)
 
+        for (const question of questionClone) {
+            if (question.imageFile) {
+                question.imageFile = await fileToBase64(question.imageFile)
+            }
+        }
 
 
         //submit questions
-        try {
-            for (const question of questions) {
-                const q = await postCreateNewQuestion(+selectedQuiz.value, question.description, question.image)
-                for (const answer of question.answers) {
-                    await postCreateNewAnswer(answer.description, answer.isCorrect, q.DT.id)
-                }
-            }
+        let res = await postUpsertQA({
+            quizId: selectedQuiz.value,
+            questions: questionClone
+
+        })
+        console.log(res)
+        if (res && res.EC === 0) {
+            toast.success(res.EM)
+            fetchQuizWithQA()
         }
-        catch (error) {
-            toast.error(error)
-            return;
+        else {
+            toast.error(res.EM)
         }
-
-
-        toast.success('Questions added successfully')
-        setSelectedQuiz({})
-        setQuestions(INIT_QUESTION)
-
-
     }
     const handleShowPreviewIMG = (questiom) => {
-        setShowModal(true)
-        setImagePreview(questiom.image)
 
+        setImagePreview(questiom.imageFile)
+        setShowModal(true)
     }
 
     return (
@@ -224,7 +280,18 @@ const UpdateQA = () => {
                                             onChange={(e) => handleOnchange('QUESTION-IMAGE', question.id, e)}
                                         />
                                         {
-                                            question.imageName !== '' ? <span className="image-name" onClick={() => handleShowPreviewIMG(question)}>{question.imageName}</span> : 'No file is uploaded'
+                                            question?.imageFile && question?.imageName !== ''
+                                                ? <span
+                                                    className="image-name"
+                                                    onClick={() => handleShowPreviewIMG(question)}>
+                                                    {question.imageName}
+                                                </span>
+                                                : question?.imageFile && question?.imageName === ''
+                                                    ? <span
+                                                        className="image-name"
+                                                        onClick={() => handleShowPreviewIMG(question)}>
+                                                        No name IMG
+                                                    </span> : 'No file is uploaded'
                                         }
                                     </div>
                                     <div className='group btn-group'>
@@ -286,8 +353,8 @@ const UpdateQA = () => {
                     <div className='add-ques-btn-container'>
                         <button
                             className='add-ques-btn'
-                            onClick={() => HandleSubmitQuestionsForQuiz()}
-                        >Add Questions</button>
+                            onClick={() => HandleUpsertQuestionsForQuiz()}
+                        >Update Quiz</button>
                     </div>
                 }
             </div>

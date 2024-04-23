@@ -3,6 +3,8 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
+import PerfectScrollbar from 'react-perfect-scrollbar'
+
 
 class App extends React.Component {
 
@@ -17,7 +19,10 @@ class App extends React.Component {
           <div className='sideNav-container'>
           </div>
           <div className='app-content'>
-            <Outlet /></div>
+            <PerfectScrollbar>
+              <Outlet />
+            </PerfectScrollbar>
+          </div>
         </div>
         <div className='footer-container'>
           <Footer />

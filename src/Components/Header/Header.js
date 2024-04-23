@@ -5,7 +5,10 @@ import { NavLink, useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { doLogout } from '../../redux/action/userAction';
 
+import { postLogout } from '../../services/apiService';
+
 import NProgress from 'nprogress';
+import { toast } from 'react-toastify';
 
 const Header = () => {
 
@@ -22,13 +25,25 @@ const Header = () => {
     const handleSignUp = () => {
         navigate('/register');
     }
-    const handleLogout = () => {
-        NProgress.start();
+    const handleLogout = async () => {
+        // NProgress.start();
+        // let res = await postLogout(account.email, account.refresh_token);
+        // if (res && res.EC === 0) {
+        //     setTimeout(() => {
+        //         dispatch(doLogout());
+        //         navigate('/login');
+        //     }, 1000);
+        //     toast.success(res.EM);
+        // }
+        // else {
+        //     toast.error(res.EM);
+        // }
+        // NProgress.done();
         setTimeout(() => {
             dispatch(doLogout());
-            navigate('/');
+            navigate('/login');
         }, 1000);
-        NProgress.done();
+
     }
 
     return (

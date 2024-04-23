@@ -70,7 +70,7 @@ const ManageQuizzes = () => {
             />}
             <Tabs>
                 <TabList>
-                    <Tab>Table Quizzes</Tab>
+                    <Tab>All Quizzes</Tab>
                     <Tab>Add Quizzes</Tab>
                     <Tab>Update Q/A Quizzes</Tab>
                     <Tab>Assign Quizzes to USER</Tab>

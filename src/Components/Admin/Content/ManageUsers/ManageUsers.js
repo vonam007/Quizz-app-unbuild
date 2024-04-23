@@ -34,12 +34,6 @@ const ManageUsers = (props) => {
         fetchListUsersWithPaginate(1);
         // fetchListUsers()
     }, []);
-    const fetchListUsers = async () => {
-        let res = await getAllUsers();
-        if (res.EC === 0) {
-            setListUser(res.DT);
-        }
-    }
     const fetchListUsersWithPaginate = async (pageNum) => {
         let res = await getUsersWithPaginate(pageNum, LIMIT_USER_PER_PAGE);
         if (res.EC === 0) {
@@ -66,10 +60,8 @@ const ManageUsers = (props) => {
         <div className="manage-users-container">
             {showModalCreate && <ModalCreateUser
                 setShowModal={setShowModalCreate}
-                fetchListUsers={fetchListUsers}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-            //fetchListUsersWithPaginate={fetchListUsersWithPaginate}
             />}
             {showModalView && <ModalViewUser
                 setShowModal={setShowModalView}
@@ -78,18 +70,14 @@ const ManageUsers = (props) => {
             {showModalEdit && <ModalUpdateUser
                 setShowModal={setShowModalEdit}
                 UserEdit={UserEdit}
-                fetchListUsers={fetchListUsers}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-            //fetchListUsersWithPaginate={fetchListUsersWithPaginate}
             />}
             {showModalDelete && <ModalDeleteUser
                 setShowModal={setShowModalDelete}
                 user={UserDelete}
-                fetchListUsers={fetchListUsers}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-            //fetchListUsersWithPaginate={fetchListUsersWithPaginate}
             />}
 
             <div className="title">
@@ -100,12 +88,6 @@ const ManageUsers = (props) => {
                     Add A New User
                 </button>
                 <div>
-                    {/* <TableUser
-                        listUser={listUser}
-                        handleClickEditBtn={handleClickEditBtn}
-                        handleClickViewBtn={handleClickViewBtn}
-                        handleClickDeleteBtn={handleClickDeleteBtn}
-                    /> */}
                     <TableUserPaginate
                         listUser={listUser}
                         handleClickEditBtn={handleClickEditBtn}

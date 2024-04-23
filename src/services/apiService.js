@@ -57,6 +57,13 @@ const postRegister = (email, username, password) => {
 
 }
 
+const postLogout = (email, refresh_token) => {
+    return axios.post('api/v1/logout', {
+        email,
+        refresh_token
+    });
+}
+
 
 //get quiz
 const getQuizByUser = () => {
@@ -127,13 +134,22 @@ const postCreateNewAnswer = (description, correct_answer, question_id) => {
 const postAssignQuiz = (quizId, userId) => {
     return axios.post('api/v1/quiz-assign-to-user', { quizId, userId });
 }
+
+const getQuizWithQA = (quizId) => {
+    return axios.get(`api/v1/quiz-with-qa/${quizId}`);
+
+}
+
+const postUpsertQA = (data) => {
+    return axios.post('api/v1/quiz-upsert-qa', { ...data });
+}
 export {
     postCreateNewUser, putEditUser, delDeleteUser,
     getUsersWithPaginate, getAllUsers,
-    postLogin, postRegister,
+    postLogin, postRegister, postLogout,
     getQuizByUser, getQuizById,
     postSubmitQuiz, postCreateNewQuiz, delDeleteQuiz, putEditQuiz,
     getAllQuizzesByAdmin,
     postCreateNewQuestion, postCreateNewAnswer,
-    postAssignQuiz
+    postAssignQuiz, getQuizWithQA, postUpsertQA
 }
