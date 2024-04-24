@@ -15,6 +15,8 @@ import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 
 import Home from './Components/Home/Home';
+import Profile from './Components/Profile/Profile';
+
 
 import { ToastContainer } from 'react-toastify';
 
@@ -50,11 +52,17 @@ const Layout = () => {
                 <Route path="/" element={<App />}>
                     <Route index element={<Home />} />
                     <Route path='users' element={<ListQuiz />} />
+                    <Route path='profile' element={
+                        <PrivateRoutes>
+                            <Profile />
+                        </PrivateRoutes>
+                    } />
                 </Route>
                 <Route path='quiz/:id' element={
                     <PrivateRoutes>
                         <DetailQuiz />
-                    </PrivateRoutes>} />
+                    </PrivateRoutes>
+                } />
                 <Route path="admins" element={
                     <PrivateRoutes>
                         <Admin />
@@ -65,6 +73,7 @@ const Layout = () => {
                     <Route path='manageQuizzes' element={<ManageQuizzes />} />
                     <Route path='manageQuestions' element={<ManageQuestions />} />
                 </Route>
+
                 <Route path='login' element={<Login />} />
                 <Route path='register' element={<Register />} />
                 <Route path='*' element={<NotFound />} />

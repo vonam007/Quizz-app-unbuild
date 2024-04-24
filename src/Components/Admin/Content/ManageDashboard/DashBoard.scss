@@ -1,6 +1,58 @@
 .dashBoard-container {
 
+
     h1 {
         padding: 10px;
     }
+
+    .dashBoard-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 0 50px;
+
+        .left-content {
+            flex: 2;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+
+            .child-chart {
+                width: calc(50% - 15px);
+                height: auto;
+                aspect-ratio: 3/2;
+                border: 1px solid #000000;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+
+                .numbers {
+                    font-size: 2rem;
+                    font-weight: 700;
+
+                }
+
+            }
+
+        }
+
+        .right-content {
+            flex: 3;
+            height: 550px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+    }
+
 }

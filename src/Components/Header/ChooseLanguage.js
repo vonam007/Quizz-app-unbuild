@@ -4,17 +4,24 @@ import './ChooseLanguage.scss';
 
 import { useEffect, useState } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { doChangeLanguage } from '../../redux/action/userAction';
 
 const ChooseLanguage = () => {
 
+    const languageRedux = useSelector(state => state.language);
+    const dispatch = useDispatch();
 
 
-    const [language, setLanguage] = useState('en');
+    const [language, setLanguage] = useState(languageRedux);
     const [chooseLanguage, setChooseLanguage] = useState(false);
     const { t, i18n } = useTranslation();
 
+
     useEffect(() => {
         i18n.changeLanguage(language);
+        dispatch(doChangeLanguage(language));
+        console.log('languageRedux', languageRedux);
     }, [language]);
 
     return (

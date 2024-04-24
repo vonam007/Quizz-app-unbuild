@@ -35,7 +35,7 @@ const SettingDropDown = () => {
             <span>Settings</span>
             <div className='dropdown-content'>
                 <div>
-                    <Link to='/'>Profile</Link>
+                    <Link to='/profile'>Profile</Link>
                 </div>
                 <div>
                     <Link onClick={() => handleLogout()}>Logout</Link>

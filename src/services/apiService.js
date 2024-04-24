@@ -64,6 +64,13 @@ const postLogout = (email, refresh_token) => {
     });
 }
 
+const postRefreshToken = (email, refresh_token) => {
+    return axios.post('api/v1/refresh-token', {
+        email,
+        refresh_token
+    });
+}
+
 
 //get quiz
 const getQuizByUser = () => {
@@ -143,13 +150,18 @@ const getQuizWithQA = (quizId) => {
 const postUpsertQA = (data) => {
     return axios.post('api/v1/quiz-upsert-qa', { ...data });
 }
+
+const getOverview = () => {
+    return axios.get('api/v1/overview');
+}
 export {
     postCreateNewUser, putEditUser, delDeleteUser,
     getUsersWithPaginate, getAllUsers,
-    postLogin, postRegister, postLogout,
+    postLogin, postRegister, postLogout, postRefreshToken,
     getQuizByUser, getQuizById,
     postSubmitQuiz, postCreateNewQuiz, delDeleteQuiz, putEditQuiz,
     getAllQuizzesByAdmin,
     postCreateNewQuestion, postCreateNewAnswer,
-    postAssignQuiz, getQuizWithQA, postUpsertQA
+    postAssignQuiz, getQuizWithQA, postUpsertQA,
+    getOverview
 }
