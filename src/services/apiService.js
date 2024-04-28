@@ -3,6 +3,14 @@ import axios from '../utils/axiosCustomize';
 
 
 // User related API calls
+const postEditProfile = (username, userImage) => {
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('userImage', userImage);
+
+    return axios.post('api/v1/profile', formData);
+}
+
 const postCreateNewUser = (email, password, username, role, image) => {
 
     // create data
@@ -61,6 +69,12 @@ const postLogout = (email, refresh_token) => {
     return axios.post('api/v1/logout', {
         email,
         refresh_token
+    });
+}
+const postChangePassword = (current_password, new_password) => {
+    return axios.post('api/v1/change-password', {
+        current_password,
+        new_password
     });
 }
 
@@ -146,6 +160,9 @@ const getQuizWithQA = (quizId) => {
     return axios.get(`api/v1/quiz-with-qa/${quizId}`);
 
 }
+const getHistory = () => {
+    return axios.get('api/v1/history');
+}
 
 const postUpsertQA = (data) => {
     return axios.post('api/v1/quiz-upsert-qa', { ...data });
@@ -155,7 +172,7 @@ const getOverview = () => {
     return axios.get('api/v1/overview');
 }
 export {
-    postCreateNewUser, putEditUser, delDeleteUser,
+    postCreateNewUser, putEditUser, delDeleteUser, postEditProfile, postChangePassword,
     getUsersWithPaginate, getAllUsers,
     postLogin, postRegister, postLogout, postRefreshToken,
     getQuizByUser, getQuizById,
@@ -163,5 +180,5 @@ export {
     getAllQuizzesByAdmin,
     postCreateNewQuestion, postCreateNewAnswer,
     postAssignQuiz, getQuizWithQA, postUpsertQA,
-    getOverview
+    getOverview, getHistory
 }

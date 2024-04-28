@@ -30,11 +30,11 @@ const Question = (props) => {
         <>
             <div className="qImg">
                 {
-                    questionData.image !== null
+                    questionData.image !== ""
                         ? <img src={`data:image/jpeg;base64,${questionData.image}`} alt="Question" />
                         : <>
                             <MdOutlineImageNotSupported style={{ width: "100%", height: "100%" }} />
-                            <h3 style={{ textAlign: "center", userSelect: "none" }}>Image not found</h3>
+                            <h3 style={{ textAlign: "center", userSelect: "none" }}>No Image</h3>
                         </>
                 }
 

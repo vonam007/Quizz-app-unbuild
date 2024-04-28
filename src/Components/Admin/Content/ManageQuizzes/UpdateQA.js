@@ -41,6 +41,7 @@ const UpdateQA = () => {
         fetchAllQuizzes()
     }, [])
 
+
     useEffect(() => {
         if (selectedQuiz && selectedQuiz.value) {
             fetchQuizWithQA()
@@ -171,7 +172,7 @@ const UpdateQA = () => {
                 if (value && value.target && value.target.files && value.target.files.length > 0) {
                     setQuestions(draft => {
                         draft[index].imageName = value.target.files[0].name
-                        draft[index].image = value.target.files[0]
+                        draft[index].imageFile = value.target.files[0]
                     })
                 }
                 return;
@@ -212,15 +213,12 @@ const UpdateQA = () => {
                 question.imageFile = await fileToBase64(question.imageFile)
             }
         }
-
-
         //submit questions
         let res = await postUpsertQA({
             quizId: selectedQuiz.value,
             questions: questionClone
 
         })
-        console.log(res)
         if (res && res.EC === 0) {
             toast.success(res.EM)
             fetchQuizWithQA()
@@ -230,7 +228,6 @@ const UpdateQA = () => {
         }
     }
     const handleShowPreviewIMG = (questiom) => {
-
         setImagePreview(questiom.imageFile)
         setShowModal(true)
     }

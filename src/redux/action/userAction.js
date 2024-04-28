@@ -1,6 +1,7 @@
 export const FETCH_USER_LOGIN_SUCCESS = 'FETCH_USER_LOGIN_SUCCESS';
 export const FETCH_USER_LOGOUT = 'FETCH_USER_LOGOUT';
 export const FETCH_USER_EXPIRED = 'FETCH_USER_EXPIRED';
+export const EDIT_PROFILE = 'EDIT_PROFILE';
 
 export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';
 export const doLogin = (data) => {
@@ -29,3 +30,10 @@ export const doExpired = (data) => {
         payload: data
     };
 };
+
+export const doEditProfile = (data) => {
+    return {
+        type: EDIT_PROFILE,
+        payload: data
+    };
+}

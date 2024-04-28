@@ -92,7 +92,7 @@ const ManageQuestions = () => {
     }
 
     const handleOnchange = (method, questionId, value, answerId) => {
-
+        console.log(method, questionId, value, answerId)
         let index = questions.findIndex(question => question.id === questionId)
         if (index === -1) return;
         switch (method) {

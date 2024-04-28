@@ -1,4 +1,4 @@
-import { FETCH_USER_LOGIN_SUCCESS, FETCH_USER_LOGOUT, CHANGE_LANGUAGE, FETCH_USER_EXPIRED } from '../action/userAction';
+import { EDIT_PROFILE, FETCH_USER_LOGIN_SUCCESS, FETCH_USER_LOGOUT, CHANGE_LANGUAGE, FETCH_USER_EXPIRED } from '../action/userAction';
 const INITIAL_STATE = {
     account: {
         access_token: '',
@@ -31,7 +31,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
                     refresh_token: action?.payload?.refresh_token
                 }
             };
-
+        case EDIT_PROFILE:
+            return {
+                ...state, account: {
+                    ...state.account,
+                    username: action.payload.username,
+                    image: action.payload.image
+                }
+            };
         case FETCH_USER_LOGOUT:
             return INITIAL_STATE;
         default: return state;
