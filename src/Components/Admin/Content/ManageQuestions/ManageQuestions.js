@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import './ManageQuestions.scss';
 import { v4 as uuidv4 } from 'uuid'
 import _ from 'lodash';
+import { useImmer } from "use-immer"
 
 import { AiFillPlusSquare } from "react-icons/ai";
 import { AiFillMinusSquare } from "react-icons/ai";
@@ -31,7 +32,7 @@ const ManageQuestions = () => {
                 }
             ]
         }]
-    const [questions, setQuestions] = useState(INIT_QUESTION);
+    const [questions, setQuestions] = useImmer(INIT_QUESTION);
 
     const [listQuiz, setListQuiz] = useState([])
 
@@ -62,66 +63,63 @@ const ManageQuestions = () => {
     const HandleAddRemoveQuestion = (method, questionId = "") => {
 
         if (method === 'ADD') {
-            const newQuestion = INIT_QUESTION[0]
-            setQuestions([...questions, newQuestion])
+            setQuestions(draft => {
+                draft.push(INIT_QUESTION[0])
+            })
         } else if (method === 'REMOVE') {
-            let questionClone = _.cloneDeep(questions)
-            questionClone = questionClone.filter(question => question.id !== questionId)
-            setQuestions(questionClone)
+            setQuestions(questions.filter(question => question.id !== questionId))
         }
     }
     const HandleAddRemoveAnswer = (method, answerId, questionId) => {
 
-        let questionClone = _.cloneDeep(questions)
-        let index = questionClone.findIndex(question => question.id === questionId)
+        let index = questions.findIndex(question => question.id === questionId)
         if (index === -1) return;
 
         if (method === 'ADD') {
-            const newAnswer = {
-                id: uuidv4(),
-                isCorrect: false,
-                description: ''
-            };
-
-            questionClone[index].answers.push(newAnswer)
-            setQuestions(questionClone)
+            setQuestions(draft => {
+                draft[index].answers.push({
+                    id: uuidv4(),
+                    isCorrect: false,
+                    description: ''
+                })
+            })
 
         } else if (method === 'REMOVE') {
-            let answerClone = questionClone[index].answers.filter(answer => answer.id !== answerId)
-            questionClone[index].answers = [...answerClone]
-            setQuestions(questionClone)
+            setQuestions(draft => {
+                draft[index].answers = questions[index].answers.filter(answer => answer.id !== answerId)
+            })
         }
     }
 
     const handleOnchange = (method, questionId, value, answerId) => {
 
-        let questionClone = _.cloneDeep(questions)
-        let index = questionClone.findIndex(question => question.id === questionId)
+        let index = questions.findIndex(question => question.id === questionId)
         if (index === -1) return;
         switch (method) {
             case 'QUESTION-DESCRIPTION':
-                questionClone[index].description = value
-                setQuestions(questionClone)
+                setQuestions(draft => {
+                    draft[index].description = value
+                })
                 return;
             case 'ANSWER-DESCRIPTION':
-                let answerIndex = questionClone[index].answers.findIndex(answer => answer.id === answerId)
+                let answerIndex = questions[index].answers.findIndex(answer => answer.id === answerId)
                 if (answerIndex === -1) return;
-                questionClone[index].answers[answerIndex].description = value
-                setQuestions(questionClone)
+                setQuestions(draft => {
+                    draft[index].answers[answerIndex].description = value
+                })
                 return;
             case 'QUESTION-IMAGE':
                 if (value && value.target && value.target.files && value.target.files.length > 0) {
-                    questionClone[index].imageName = value.target.files[0].name
-                    questionClone[index].image = value.target.files[0]
-                    setQuestions(questionClone)
+                    setQuestions(draft => {
+                        draft[index].imageName = value.target.files[0].name
+                        draft[index].image = value.target.files[0]
+                    })
                 }
                 return;
-
             case 'ANSWER-IS-CORRECT':
-                let answerIndex2 = questionClone[index].answers.findIndex(answer => answer.id === answerId)
+                let answerIndex2 = questions[index].answers.findIndex(answer => answer.id === answerId)
                 if (answerIndex2 === -1) return;
-                questionClone[index].answers[answerIndex2].isCorrect = value
-                setQuestions(questionClone)
+                setQuestions(draft => { draft[index].answers[answerIndex2].isCorrect = value })
                 return;
             default:
                 return;
