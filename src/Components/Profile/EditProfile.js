@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LuImagePlus } from "react-icons/lu";
 import { RxAvatar } from "react-icons/rx";
 import { postEditProfile } from '../../services/apiService';
@@ -11,8 +11,8 @@ const EditProfile = (props) => {
     const { account, setIsEdit } = props
     const [imageFile, setImageFile] = useState(account.image)
     const [username, setUsername] = useState(account.username)
-
     const dispatch = useDispatch();
+
     const handleSaveIMG = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();

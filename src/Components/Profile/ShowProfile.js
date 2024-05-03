@@ -1,5 +1,6 @@
 import { postChangePassword, postLogout } from '../../services/apiService';
 import { toast } from 'react-toastify';
+import { RxAvatar } from "react-icons/rx";
 import { doLogout } from '../../redux/action/userAction';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -40,7 +41,11 @@ const ShowProfile = (props) => {
     return (
         <div className='profile-content'>
             <div className='avatar'>
-                <img src={`data:image/jpeg;base64,${account.image}`} alt='avatar' />
+                {
+                    account.image === "" || account.image === null
+                        ? <RxAvatar className='imgFileEmpty' />
+                        : <img src={`data:image/jpeg;base64,${account.image}`} alt='avatar' />
+                }
             </div>
             <div className='info'>
                 <div className='username'>
