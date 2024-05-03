@@ -30,7 +30,7 @@ const Question = (props) => {
         <>
             <div className="qImg">
                 {
-                    questionData.image !== ""
+                    (questionData.image !== "" && questionData.image !== null)
                         ? <img src={`data:image/jpeg;base64,${questionData.image}`} alt="Question" />
                         : <>
                             <MdOutlineImageNotSupported style={{ width: "100%", height: "100%" }} />

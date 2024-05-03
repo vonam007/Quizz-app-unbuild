@@ -50,7 +50,7 @@ const EditProfile = (props) => {
         <div className='profile-content editProfile'>
             <div className='avatar'>
                 {
-                    imageFile === ""
+                    imageFile === "" || imageFile === null
                         ? <RxAvatar className='imgFileEmpty' />
                         : <img src={`data:image/jpeg;base64,${imageFile}`} alt='avatar' />
                 }
